@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Name: VuforiaConfiguration
   m_EditorClassIdentifier: 
   vuforia:
-    vuforiaLicenseKey: 
+    vuforiaLicenseKey: Ac269hr/////AAAAGaR8PGbnA06crU8jDIV3AEQM+kNL1PfEgW1JqkdRWop6b8t/E8PMCUur35KqZ//o3UGo7UCivhQjSb+s+7RDP2Wq+W7FSnVqSxNjbZXD19y9wmrSAwjxw6332rXSffgpxzYf50H0zdTrq30i6CLlVYTdn4jjMJizUSJ+/b9MYArmjZB41yFQyS0R+InCe9Y6jKcVe9tFm9zpTpJivSX4jRVK8T4k+XB8Jcbv4DgdoB2z8fjpQ0xhPHCu03IQg08+pqI4QQbadwTWqYl4LkBaVvIlzWmWS8vWh/6+LZyfaOnWRrDhNRxqhbWw4voL8SJaAH06ZUSrkJwMuoZNcdNm9YUBVghSBwlWAygUUE1i4ZPP
     delayedInitialization: 0
     cameraDeviceModeSetting: -1
-    maxSimultaneousImageTargets: 1
-    maxSimultaneousObjectTargets: 1
+    maxSimultaneousImageTargets: 4
+    maxSimultaneousObjectTargets: 4
     useDelayedLoadingObjectTargets: 0
     cameraDirection: 0
     mirrorVideoBackground: 0
@@ -55,8 +55,8 @@ MonoBehaviour:
     autoInitBuilder: 0
     sceneUnitsToMillimeter: 0
   deviceTracker:
-    autoInitTracker: 0
-    autoStartTracker: 0
+    autoInitTracker: 1
+    autoStartTracker: 1
     posePrediction: 0
     modelCorrectionMode: 0
     modelTransformEnabled: 0
