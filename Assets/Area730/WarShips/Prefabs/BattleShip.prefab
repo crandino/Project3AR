@@ -245,6 +245,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 456808}
   - 95: {fileID: 9510120}
+  - 114: {fileID: 11423300}
   m_Layer: 0
   m_Name: BattleShip
   m_TagString: Untagged
@@ -511,10 +512,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 171664}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
+  m_LocalPosition: {x: -0.373, y: 0, z: -0.6}
+  m_LocalScale: {x: 1.3988776, y: 1.3988779, z: 1.3988779}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_Children:
   - {fileID: 424168}
   - {fileID: 450480}
@@ -655,7 +656,7 @@ MeshRenderer:
   m_GameObject: {fileID: 184928}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_Materials:
   - {fileID: 2100000, guid: b3f60d8340843427a89b7f28b39c1e49, type: 2}
   m_SubsetIndices: 
@@ -681,7 +682,7 @@ MeshRenderer:
   m_GameObject: {fileID: 158252}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_Materials:
   - {fileID: 2100000, guid: b3f60d8340843427a89b7f28b39c1e49, type: 2}
   m_SubsetIndices: 
@@ -785,7 +786,7 @@ MeshRenderer:
   m_GameObject: {fileID: 124918}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_Materials:
   - {fileID: 2100000, guid: aede5070e50b24ebaa351c608bb19a06, type: 2}
   m_SubsetIndices: 
@@ -863,7 +864,7 @@ MeshRenderer:
   m_GameObject: {fileID: 188562}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_Materials:
   - {fileID: 2100000, guid: b3f60d8340843427a89b7f28b39c1e49, type: 2}
   m_SubsetIndices: 
@@ -967,7 +968,7 @@ MeshRenderer:
   m_GameObject: {fileID: 121064}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_Materials:
   - {fileID: 2100000, guid: b3f60d8340843427a89b7f28b39c1e49, type: 2}
   m_SubsetIndices: 
@@ -993,7 +994,7 @@ MeshRenderer:
   m_GameObject: {fileID: 131740}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_Materials:
   - {fileID: 2100000, guid: b3f60d8340843427a89b7f28b39c1e49, type: 2}
   m_SubsetIndices: 
@@ -1071,7 +1072,7 @@ MeshRenderer:
   m_GameObject: {fileID: 167666}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_Materials:
   - {fileID: 2100000, guid: aede5070e50b24ebaa351c608bb19a06, type: 2}
   m_SubsetIndices: 
@@ -1123,7 +1124,7 @@ MeshRenderer:
   m_GameObject: {fileID: 147340}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_Materials:
   - {fileID: 2100000, guid: b3f60d8340843427a89b7f28b39c1e49, type: 2}
   m_SubsetIndices: 
@@ -1291,6 +1292,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11423300
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 171664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16467952edca16840b55c98bc983774f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
