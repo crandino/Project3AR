@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Cannon
+  - Pos_Turret
+  - Terrain
+  - Ball
   layers:
   - Default
   - TransparentFX
