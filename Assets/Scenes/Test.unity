@@ -704,15 +704,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 464962, guid: 950c0a0cf14577549b026c95956a3c99, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 4.9501176
+      value: 4.89
       objectReference: {fileID: 0}
     - target: {fileID: 464962, guid: 950c0a0cf14577549b026c95956a3c99, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.1889358
+      value: 0.49408
       objectReference: {fileID: 0}
     - target: {fileID: 464962, guid: 950c0a0cf14577549b026c95956a3c99, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -0.9446789
+      value: -0.92425
       objectReference: {fileID: 0}
     - target: {fileID: 464962, guid: 950c0a0cf14577549b026c95956a3c99, type: 2}
       propertyPath: m_LocalRotation.x
@@ -736,15 +736,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 464962, guid: 950c0a0cf14577549b026c95956a3c99, type: 2}
       propertyPath: m_LocalScale.x
-      value: 0.62978595
+      value: 0.38066566
       objectReference: {fileID: 0}
     - target: {fileID: 464962, guid: 950c0a0cf14577549b026c95956a3c99, type: 2}
       propertyPath: m_LocalScale.y
-      value: 0.62978595
+      value: 0.38066566
       objectReference: {fileID: 0}
     - target: {fileID: 464962, guid: 950c0a0cf14577549b026c95956a3c99, type: 2}
       propertyPath: m_LocalScale.z
-      value: 0.62978595
+      value: 0.38066566
+      objectReference: {fileID: 0}
+    - target: {fileID: 464962, guid: 950c0a0cf14577549b026c95956a3c99, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -89.980194
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 950c0a0cf14577549b026c95956a3c99, type: 2}
@@ -834,15 +838,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 461212, guid: 75450dad01decb44b867e81c5a1fd604, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 3.0229728
+      value: 3.73
       objectReference: {fileID: 0}
     - target: {fileID: 461212, guid: 75450dad01decb44b867e81c5a1fd604, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.18893576
+      value: 0.49408
       objectReference: {fileID: 0}
     - target: {fileID: 461212, guid: 75450dad01decb44b867e81c5a1fd604, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -0.9446789
+      value: -0.92425
       objectReference: {fileID: 0}
     - target: {fileID: 461212, guid: 75450dad01decb44b867e81c5a1fd604, type: 2}
       propertyPath: m_LocalRotation.x
@@ -866,15 +870,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 461212, guid: 75450dad01decb44b867e81c5a1fd604, type: 2}
       propertyPath: m_LocalScale.x
-      value: 0.62978595
+      value: 0.38066566
       objectReference: {fileID: 0}
     - target: {fileID: 461212, guid: 75450dad01decb44b867e81c5a1fd604, type: 2}
       propertyPath: m_LocalScale.y
-      value: 0.62978595
+      value: 0.38066566
       objectReference: {fileID: 0}
     - target: {fileID: 461212, guid: 75450dad01decb44b867e81c5a1fd604, type: 2}
       propertyPath: m_LocalScale.z
-      value: 0.62978595
+      value: 0.38066566
+      objectReference: {fileID: 0}
+    - target: {fileID: 461212, guid: 75450dad01decb44b867e81c5a1fd604, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -89.980194
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 75450dad01decb44b867e81c5a1fd604, type: 2}
@@ -895,7 +903,7 @@ Mesh:
     vertexCount: 4
     localAABB:
       m_Center: {x: 0, y: 0, z: 0}
-      m_Extent: {x: 0.35364556, y: 0, z: 0.5}
+      m_Extent: {x: 0.35963282, y: 0, z: 0.5}
   m_Shapes:
     vertices: []
     shapes: []
@@ -947,7 +955,7 @@ Mesh:
       format: 0
       dimension: 0
     m_DataSize: 128
-    _typelessdata: 0811b5be00000000000000bf000000000000803f0000000000000000000000000811b5be000000000000003f000000000000803f00000000000000000000803f0811b53e00000000000000bf000000000000803f000000000000803f000000000811b53e000000000000003f000000000000803f000000000000803f0000803f
+    _typelessdata: cb21b8be00000000000000bf000000000000803f000000000000000000000000cb21b8be000000000000003f000000000000803f00000000000000000000803fcb21b83e00000000000000bf000000000000803f000000000000803f00000000cb21b83e000000000000003f000000000000803f000000000000803f0000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0

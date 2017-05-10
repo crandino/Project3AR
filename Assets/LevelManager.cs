@@ -78,8 +78,8 @@ public class LevelManager : MonoBehaviour
 
         foreach (GameObject e in list_of_enemies)
         {
-            Vector3 dir = (cannon.transform.position - e.transform.position).normalized;
-            e.transform.Translate(dir * speed * Time.deltaTime);
+           // Vector3 dir = (cannon.transform.position - e.transform.position).normalized;
+            e.transform.Translate(transform.forward * speed * Time.deltaTime);  // Enemies follow plane 
         }       
     }
 }
