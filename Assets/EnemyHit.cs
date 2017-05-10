@@ -8,7 +8,13 @@ public class EnemyHit : MonoBehaviour {
         if (col.gameObject.tag == "Ball")
         {
             GetComponent<Rigidbody>().useGravity = true;
-            Destroy(col.gameObject);                            // Ball disappears when hit a cylinder
+            Destroy(col.gameObject);         // Ball disappears when hit a cylinder
         }
+
+        if (col.gameObject.tag == "Enemy_A")
+        {
+
+        }
+
     }
 }

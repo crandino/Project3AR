@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour
     private GameObject turret_marker;
     private GameObject cannon;
 
-    public GameObject basic_enemy;
+    public GameObject enemy_A;
 
     float timer;
     float time_between_spawns;
@@ -67,7 +67,7 @@ public class LevelManager : MonoBehaviour
         enemy_position.x += random_width;
 
         //Vector3 enemy_position = terrain.transform.position + new Vector3(random_pos.x, 0.75f, random_pos.y);
-        GameObject enemy = Instantiate(basic_enemy, enemy_position, Quaternion.identity) as GameObject;
+        GameObject enemy = Instantiate(enemy_A, enemy_position, Quaternion.identity) as GameObject;
         enemy.transform.parent = ground.transform;
         list_of_enemies.Add(enemy);
     }
@@ -78,7 +78,7 @@ public class LevelManager : MonoBehaviour
 
         foreach (GameObject e in list_of_enemies)
         {
-           // Vector3 dir = (cannon.transform.position - e.transform.position).normalized;
+            //Vector3 dir = (cannon.transform.position - e.transform.position).normalized;
             e.transform.Translate(transform.forward * speed * Time.deltaTime);  // Enemies follow plane 
         }       
     }

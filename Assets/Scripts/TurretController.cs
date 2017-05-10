@@ -43,7 +43,7 @@ public class TurretController : MonoBehaviour
                 }
                 power_tmp += final_time;
 
-                Vector3 ball_position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1.0f, gameObject.transform.position.z);
+                Vector3 ball_position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
                 GameObject ball_instance = (GameObject)Instantiate(ball_prefab, ball_position, Quaternion.identity);
                 ball_instance.GetComponent<Rigidbody>().AddForce(power_tmp * gameObject.transform.forward);
             }
