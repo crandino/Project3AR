@@ -32,7 +32,7 @@ public class LevelManager : MonoBehaviour
         //ground.transform.position = new Vector3(999.9f, 999.9f, 999.9f);
 
         timer = 0.0f;
-        time_between_spawns = 5.0f;
+        time_between_spawns = 1.0f;
 
         list_of_enemies = new List<GameObject>();   
 	}
@@ -59,7 +59,7 @@ public class LevelManager : MonoBehaviour
 
     void GenerateEnemy()
     {
-        float random_distance = Random.Range(8.0f, 20.0f);
+        float random_distance = Random.Range(8.0f, 30.0f);
         float random_width = Random.Range(-4.0f, 4.0f);
 
         Vector3 enemy_position = (ground.transform.position) - (ground.transform.forward * random_distance);
@@ -81,5 +81,10 @@ public class LevelManager : MonoBehaviour
            // Vector3 dir = (cannon.transform.position - e.transform.position).normalized;
             e.transform.Translate(transform.forward * speed * Time.deltaTime);  // Enemies follow plane 
         }       
+    }
+
+    void OnTriggerEnter()
+    {
+        Debug.Log("YOU LOSE!");
     }
 }
