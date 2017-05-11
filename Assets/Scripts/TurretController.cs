@@ -9,8 +9,22 @@ public class TurretController : MonoBehaviour
     public float charger_time;
 
     private float start_time;
-    private float final_time;
+    [HideInInspector]
+    public float final_time;
+
     private float power_units;
+    private float power_tmp
+    {
+        get
+        {
+            return power_tmp;
+        }
+
+        set
+        {
+            power_tmp = value;
+        }
+    }
 
     private GameObject plane;
 
@@ -26,21 +40,20 @@ public class TurretController : MonoBehaviour
         // Track a single touch as a direction control.
         if (Input.touchCount > 0)
         {
-            //Touch touch = Input.GetTouch(0);
-            //if(touch.phase == TouchPhase.Began)
-            //{
-            //    Vector3 ball_position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1.0f, gameObject.transform.position.z);
-            //    GameObject ball_instance = (GameObject)Instantiate(ball_prefab, ball_position, Quaternion.identity);
-            //    ball_instance.GetComponent<Rigidbody>().AddForce(power_launch * gameObject.transform.forward);
-            //}
-            float power_tmp = min_power_launch;
+            power_tmp = 0;
             if(Input.GetTouch(0).phase == TouchPhase.Began)
             {
                 start_time = Time.time * 1000;
             }
-            if (Input.GetTouch(0).phase == TouchPhase.Ended)
+
+            if (Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetTouch(0).phase == TouchPhase.Stationary)
             {
                 final_time = (Time.time * 1000) - start_time;
+            }
+
+            if (Input.GetTouch(0).phase == TouchPhase.Ended)
+            {
+                //final_time = (Time.time * 1000) - start_time;
                 if(final_time > charger_time)
                 {
                     power_tmp = max_power_launch;
