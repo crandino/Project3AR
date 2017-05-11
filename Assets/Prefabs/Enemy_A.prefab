@@ -12,10 +12,10 @@ GameObject:
   - 136: {fileID: 13661002}
   - 23: {fileID: 2392158}
   - 54: {fileID: 5463080}
-  - 114: {fileID: 11460040}
+  - 114: {fileID: 11433682}
   m_Layer: 0
-  m_Name: Basic_enemy
-  m_TagString: Untagged
+  m_Name: Enemy_A
+  m_TagString: Enemy_A
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,7 +81,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &11460040
+--- !u!114 &11433682
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -89,9 +89,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 163710}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 418ad7e0772f7bb4e87cce87519aa1e7, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c2acc039a367b04e9e530f16f9af53c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  points: 100
+  speed: 1
+  max_time_before_disappear: 3
 --- !u!136 &13661002
 CapsuleCollider:
   m_ObjectHideFlags: 1

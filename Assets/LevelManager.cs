@@ -7,16 +7,17 @@ public class LevelManager : MonoBehaviour
     private GameObject turret_marker;
     private GameObject cannon;
 
+    // Types of enemies!
     public GameObject enemy_A;
+    public GameObject enemy_B;
+    public GameObject enemy_C;
+    public GameObject enemy_D;
 
     float timer;
     float time_between_spawns;
 
-    float max_distance_plane = 2.0f;
-
-    bool ground_set = false;
-
-    List<GameObject> list_of_enemies;
+    public List<GameObject> list_of_enemies;
+    private List<GameObject> list_of_enemies_to_remove;
 
 	// Use this for initialization
 	void Start ()
@@ -34,8 +35,9 @@ public class LevelManager : MonoBehaviour
         timer = 0.0f;
         time_between_spawns = 1.0f;
 
-        list_of_enemies = new List<GameObject>();   
-	}
+        list_of_enemies = new List<GameObject>();
+        list_of_enemies_to_remove = new List<GameObject>();
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -74,12 +76,22 @@ public class LevelManager : MonoBehaviour
 
     void UpdateEnemies()
     {
-        float speed = 1.0f;
-
+        // Updating enemies
         foreach (GameObject e in list_of_enemies)
         {
-            //Vector3 dir = (cannon.transform.position - e.transform.position).normalized;
-            e.transform.Translate(transform.forward * speed * Time.deltaTime);  // Enemies follow plane 
+            Enemy enemy_script = e.GetComponent<Enemy>();
+
+            if (enemy_script.ReadyToDelete())
+                list_of_enemies_to_remove.Add(e);
+            else
+            {
+                enemy_script.UpdateEnemy();
+            }
+        }
+        
+        foreach (GameObject e in list_of_enemies_to_remove)
+        {
+            if(list_of_enemies.Remove(e)) Destroy(e);
         }       
     }
 

@@ -47,20 +47,13 @@ public class TurretController : MonoBehaviour
                 }
                 else
                 {
-                    power_tmp = (power_units * final_time);
+                    power_tmp = (power_units * final_time) + min_power_launch;
                 }
 
-                Vector3 ball_position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
+                Vector3 ball_position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.75f, gameObject.transform.position.z);
                 GameObject ball_instance = (GameObject)Instantiate(ball_prefab, ball_position, Quaternion.identity);
                 ball_instance.GetComponent<Rigidbody>().AddForce(power_tmp * gameObject.transform.forward);
             }
         }
-        
-        //if (Input.anyKeyDown)
-        //{
-        //    Vector3 ball_position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1.0f, gameObject.transform.position.z);
-        //    GameObject ball_instance = (GameObject)Instantiate(ball_prefab, ball_position, Quaternion.identity);
-        //    ball_instance.GetComponent<Rigidbody>().AddForce(power_launch * gameObject.transform.forward);
-        //}
     }
 }
