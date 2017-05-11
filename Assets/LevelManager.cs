@@ -61,8 +61,8 @@ public class LevelManager : MonoBehaviour
 
     void GenerateEnemy()
     {
-        float random_distance = Random.Range(8.0f, 30.0f);
-        float random_width = Random.Range(-4.0f, 4.0f);
+        float random_distance = Random.Range(10.0f, 35.0f);
+        float random_width = Random.Range(-4.5f, 4.5f);
 
         Vector3 enemy_position = (ground.transform.position) - (ground.transform.forward * random_distance);
         enemy_position.y = 0.75f;

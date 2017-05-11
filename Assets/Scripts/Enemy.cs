@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
 
+    // Public variables
     public uint points;
     public float speed;
     public float max_time_before_disappear;
@@ -11,12 +12,23 @@ public class Enemy : MonoBehaviour {
     private bool impacted;
     private bool ready_to_delete;
 
+    private bool shield_active;
+
+    private Color color_active;
+    private Color color_inactive;
+
     private LevelManager level_manager;
 
     void Start()
     {
         level_manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelManager>();
 
+        color_inactive = Color.gray;
+        color_active = Color.yellow;
+
+        GetComponent<Renderer>().material.color = color_active;
+
+        shield_active = true;
         impacted = false;
         ready_to_delete = false;
     }
@@ -49,19 +61,34 @@ public class Enemy : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag == "Ball")
+        //Colisions between enemies
+        if (col.gameObject.tag == "Enemy_A")
         {
-            GetComponent<Rigidbody>().useGravity = true;
-            impacted = true;
-
-            // Ball disappears when hit a cylinder
-            //Destroy(col.gameObject);         
+            if (!shield_active)
+            {
+                GetComponent<Rigidbody>().useGravity = true;
+                impacted = true;
+                GetComponent<Renderer>().material.color = color_inactive;
+            }
         }
 
-        //if (col.gameObject.tag == "Enemy_A")
-        //{
-
-        //}
+        // Colisions between ball and enemy
+        if (col.gameObject.tag == "Ball")
+        {
+            if (shield_active)
+            {
+                shield_active = false;
+                transform.GetChild(0).gameObject.SetActive(false);
+                gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                Destroy(col.gameObject);
+            }
+            else
+            {
+                GetComponent<Rigidbody>().useGravity = true;
+                impacted = true;
+                GetComponent<Renderer>().material.color = color_inactive;
+            }
+        }
     }
 
     public bool ReadyToDelete()
