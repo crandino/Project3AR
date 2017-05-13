@@ -14,6 +14,14 @@ public class InGameUI : MonoBehaviour {
     private int game_phase;
     private bool game_on;
 
+    [HideInInspector]
+    public bool game_start;
+
+    public void SetStartGame(bool start)
+    {
+        game_start = start;
+    }
+
     private int charging_bar_value
     {
         //Getter for charging_bar_value
@@ -47,6 +55,7 @@ public class InGameUI : MonoBehaviour {
         charging_bar_value = 0;
         charging_value = GameObject.FindGameObjectWithTag("Cannon").GetComponent<TurretController>().charger_time;
         charging_units = charging_value / 100.0f;
+
         GameObject.Find("Canvas").transform.FindChild("Background").gameObject.SetActive(false);
         GameObject.Find("Canvas").transform.FindChild("Foreground").gameObject.SetActive(false);
     }
@@ -60,6 +69,8 @@ public class InGameUI : MonoBehaviour {
         {
             if(game_on == false)
             {
+                GameObject.Find("Canvas").transform.FindChild("StartButton").gameObject.SetActive(false);
+
                 GameObject.Find("Canvas").transform.FindChild("Background").gameObject.SetActive(true);
                 GameObject.Find("Canvas").transform.FindChild("Foreground").gameObject.SetActive(true);
                 game_on = true;
