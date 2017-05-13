@@ -530,7 +530,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: As_BastoMaterial
+  m_Name: As_EspadaMaterial
   m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -543,7 +543,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: c2f6e6f4302a4389a5ef44e0bc25ac5c, type: 3}
+          m_Texture: {fileID: 2800000, guid: ca8c27af379b4bbca7761dd0b91b05e1, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats: {}
@@ -932,8 +932,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2833541ab7abcdb419afce3a213eb32c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy_A: {fileID: 163710, guid: ad7f7aacc7e833f47afdaf034306af40, type: 2}
   debug_mode: 1
+  enemy_A: {fileID: 163710, guid: ad7f7aacc7e833f47afdaf034306af40, type: 2}
+  time_between_spawns: 5
   list_of_enemies: []
 --- !u!4 &1181568881
 Transform:
