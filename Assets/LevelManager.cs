@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+public enum GAME_PHASES
+{
+    MENU = 0,
+    GAME,
+    SCORE
+}
+
 public class LevelManager : MonoBehaviour
 {
-    public enum GAME_PHASES
-    {
-        MENU,
-        GAME
-    }
-
     private GameObject ground_marker;
     private GameObject turret_marker;
     private GameObject cannon;
@@ -26,6 +27,10 @@ public class LevelManager : MonoBehaviour
 
     private GAME_PHASES game_phase;
 
+    public int GetCurrentPhase()
+    {
+        return (int)game_phase;
+    }
 	// Use this for initialization
 	void Start ()
     {
