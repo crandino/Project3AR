@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour {
     private Color color_inactive;
 
     private LevelManager level_manager;
+    GameObject ball_impacted;
 
     void Start()
     {
@@ -34,7 +35,13 @@ public class Enemy : MonoBehaviour {
         // Type of enemies
         speed = Random.Range(min_speed, max_speed);
         shield_active = Random.Range(0, 2) == 1 ? true : false;
-       
+
+        if(shield_active)
+        {
+            gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            transform.GetChild(0).gameObject.SetActive(true);
+        }
+
         // Private variables to control impacts, 
         impacted = false;
         ready_to_delete = false;
@@ -62,35 +69,20 @@ public class Enemy : MonoBehaviour {
 
     public void FixedUpdate()
     {
-        if(impacted)
+        if (impacted)
         {
             GetComponent<Rigidbody>().useGravity = true;
             GetComponent<Renderer>().material.color = color_inactive;
         }
-
-        if (!shield_active)
+        else if (!shield_active)
         {
-            transform.GetChild(0).gameObject.SetActive(false);
             gameObject.GetComponent<Rigidbody>().isKinematic = false;
+            transform.GetChild(0).gameObject.SetActive(false);            
         }
     }
 
     void OnCollisionEnter(Collision col)
     {
-        //Colisions between enemies
-        //if (col.gameObject.tag == "Enemy_A")
-        //{
-        //    if (shield_active)
-        //    {
-        //        shield_active = false;
-        //        shield_broken = true;
-        //    }
-        //    else
-        //    {
-        //        impacted = true;
-        //    }                
-        //}
-
         // Colisions between ball and enemy
         if (col.gameObject.tag == "Ball")
         {
@@ -102,6 +94,21 @@ public class Enemy : MonoBehaviour {
             {
                 impacted = true;
             }
+
+            col.gameObject.SetActive(false);
+        }
+
+        //Colisions between enemies
+        if (col.gameObject.tag == "Enemy")
+        {
+            if (!shield_active)
+            {
+                impacted = true;
+            }
+            //else
+            //{
+            //    impacted = true;
+            //}
         }
     }
 
