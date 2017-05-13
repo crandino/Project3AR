@@ -5,7 +5,8 @@ public enum GAME_PHASES
 {
     MENU = 0,
     GAME,
-    SCORE
+    WIN,
+    LOSE
 }
 
 public class LevelManager : MonoBehaviour
@@ -25,9 +26,9 @@ public class LevelManager : MonoBehaviour
 
     private GAME_PHASES game_phase;
 
-    public int GetCurrentPhase()
+    public GAME_PHASES GetCurrentPhase()
     {
-        return (int)game_phase;
+        return game_phase;
     }
 
 	// Use this for initialization
@@ -52,7 +53,7 @@ public class LevelManager : MonoBehaviour
         {
             case (GAME_PHASES.MENU):
                 {
-                    if (AreTargetsReady() &&  GameObject.Find("UIManager").GetComponent<InGameUI>().game_start || debug_mode )
+                    if (AreTargetsReady() && GameObject.Find("UIManager").GetComponent<InGameUI>().game_start || debug_mode )
                         game_phase = GAME_PHASES.GAME;
                     break;
                 }
@@ -70,6 +71,24 @@ public class LevelManager : MonoBehaviour
                         timer += Time.deltaTime;
                 }
                 break;
+
+            case (GAME_PHASES.WIN):
+                {
+                    if(GameObject.Find("UIManager").GetComponent<InGameUI>().main_menu)
+                    {
+                        game_phase = GAME_PHASES.MENU;
+                    }
+                    break;
+                }
+
+            case (GAME_PHASES.LOSE):
+                {
+                    if (GameObject.Find("UIManager").GetComponent<InGameUI>().main_menu)
+                    {
+                        game_phase = GAME_PHASES.MENU;
+                    }
+                    break;
+                }
         }   
 	}
 
@@ -116,6 +135,8 @@ public class LevelManager : MonoBehaviour
 
     void OnTriggerEnter()
     {
+        game_phase = GAME_PHASES.LOSE;
+
         Debug.Log("YOU LOSE!");
     }
 }

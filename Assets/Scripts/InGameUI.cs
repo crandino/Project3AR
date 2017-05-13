@@ -11,15 +11,22 @@ public class InGameUI : MonoBehaviour {
     private float charging_units;
     private float actual_time_value;
 
-    private int game_phase;
+    private GAME_PHASES game_phase;
     private bool game_on;
 
     [HideInInspector]
     public bool game_start;
+    [HideInInspector]
+    public bool main_menu;
 
     public void SetStartGame(bool start)
     {
         game_start = start;
+    }
+
+    public void SetMainMenu(bool menu)
+    {
+        main_menu = menu;
     }
 
     private int charging_bar_value
@@ -51,13 +58,30 @@ public class InGameUI : MonoBehaviour {
     void Start ()
     {
         game_on = false;
+
         foreground_image = GameObject.Find("Canvas").transform.FindChild("Foreground").GetComponent<Image>();
         charging_bar_value = 0;
         charging_value = GameObject.FindGameObjectWithTag("Cannon").GetComponent<TurretController>().charger_time;
         charging_units = charging_value / 100.0f;
 
+        //Charging bar
         GameObject.Find("Canvas").transform.FindChild("Background").gameObject.SetActive(false);
         GameObject.Find("Canvas").transform.FindChild("Foreground").gameObject.SetActive(false);
+
+        //Start Screen
+        GameObject.Find("Canvas").transform.FindChild("StartButton").gameObject.SetActive(false);
+
+        //You Win Screen
+        GameObject.Find("Canvas").transform.FindChild("YouWinText").gameObject.SetActive(false);
+
+        //You Lose Screen
+        GameObject.Find("Canvas").transform.FindChild("YouLoseText").gameObject.SetActive(false);
+
+        //Main Menu Button
+        GameObject.Find("Canvas").transform.FindChild("MainMenuButton").gameObject.SetActive(false);
+
+        game_start = false;
+        main_menu = false;
     }
 
     // Update is called once per frame
@@ -65,18 +89,59 @@ public class InGameUI : MonoBehaviour {
     {
         game_phase = GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelManager>().GetCurrentPhase();
 
-        if (game_phase == 1)
+        switch (game_phase)
         {
-            if(game_on == false)
-            {
-                GameObject.Find("Canvas").transform.FindChild("StartButton").gameObject.SetActive(false);
+            case (GAME_PHASES.MENU):
+                {
+                    if (game_on == true)
+                    {
+                        game_start = false;
+                        main_menu = false;
 
-                GameObject.Find("Canvas").transform.FindChild("Background").gameObject.SetActive(true);
-                GameObject.Find("Canvas").transform.FindChild("Foreground").gameObject.SetActive(true);
-                game_on = true;
-            }
-            actual_time_value = GameObject.FindGameObjectWithTag("Cannon").GetComponent<TurretController>().final_time;
-            charging_bar_value = (int)(actual_time_value / charging_units);
+                        GameObject.Find("Canvas").transform.FindChild("YouWinText").gameObject.SetActive(false);
+                        GameObject.Find("Canvas").transform.FindChild("YouLoseText").gameObject.SetActive(false);
+                        GameObject.Find("Canvas").transform.FindChild("MainMenuButton").gameObject.SetActive(false);
+                    }
+
+                    GameObject.Find("Canvas").transform.FindChild("StartButton").gameObject.SetActive(true);
+                    break;
+                }
+
+            case (GAME_PHASES.GAME):
+                {
+                    if (game_on == false)
+                    {
+                        GameObject.Find("Canvas").transform.FindChild("StartButton").gameObject.SetActive(false);
+
+                        GameObject.Find("Canvas").transform.FindChild("Background").gameObject.SetActive(true);
+                        GameObject.Find("Canvas").transform.FindChild("Foreground").gameObject.SetActive(true);
+                        game_on = true;
+                    }
+
+                    actual_time_value = GameObject.FindGameObjectWithTag("Cannon").GetComponent<TurretController>().final_time;
+                    charging_bar_value = (int)(actual_time_value / charging_units);
+                }
+                break;
+
+            case (GAME_PHASES.WIN):
+                {
+                    GameObject.Find("Canvas").transform.FindChild("Background").gameObject.SetActive(false);
+                    GameObject.Find("Canvas").transform.FindChild("Foreground").gameObject.SetActive(false);
+
+                    GameObject.Find("Canvas").transform.FindChild("YouWinText").gameObject.SetActive(true);
+                    GameObject.Find("Canvas").transform.FindChild("MainMenuButton").gameObject.SetActive(true);
+                    break;
+                }
+
+            case (GAME_PHASES.LOSE):
+                {
+                    GameObject.Find("Canvas").transform.FindChild("Background").gameObject.SetActive(false);
+                    GameObject.Find("Canvas").transform.FindChild("Foreground").gameObject.SetActive(false);
+
+                    GameObject.Find("Canvas").transform.FindChild("YouLoseText").gameObject.SetActive(true);
+                    GameObject.Find("Canvas").transform.FindChild("MainMenuButton").gameObject.SetActive(true);
+                    break;
+                }
         }
     }
 
