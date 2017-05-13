@@ -9,7 +9,8 @@ public class TurretController : MonoBehaviour
     public float charger_time;
 
     private float start_time;
-    private float final_time;
+    [HideInInspector]
+    public float final_time;
     private float power_units;
 
     private GameObject plane;
