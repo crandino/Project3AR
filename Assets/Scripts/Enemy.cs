@@ -5,9 +5,11 @@ public class Enemy : MonoBehaviour {
 
     // Public variables
     public uint points;
-    public float speed;
+    public float min_speed;
+    public float max_speed;
     public float max_time_before_disappear;
 
+    private float speed;
     private float time_since_impact;
     private bool impacted;
     private bool ready_to_delete;
@@ -25,22 +27,21 @@ public class Enemy : MonoBehaviour {
 
         color_inactive = Color.gray;
         color_active = Color.yellow;
-
+        
+        // Setting color
         GetComponent<Renderer>().material.color = color_active;
 
-        shield_active = true;
+        // Type of enemies
+        speed = Random.Range(min_speed, max_speed);
+        shield_active = Random.Range(0, 2) == 1 ? true : false;
+       
+        // Private variables to control impacts, 
         impacted = false;
         ready_to_delete = false;
     }
 
-	public void UpdateEnemy()
+	public void Update()
     {
-        //Vector3 dir = transform.forward;
-        //dir.x += Mathf.Sin(transform.position.z);
-        //dir.Normalize();
-        //dir *= (speed * Time.deltaTime);
-        //transform.Translate(dir);
-
         transform.Translate(transform.forward * speed * Time.deltaTime);  // Enemies follow plane 
 
         if(impacted)
@@ -59,18 +60,36 @@ public class Enemy : MonoBehaviour {
         }
     }
 
+    public void FixedUpdate()
+    {
+        if(impacted)
+        {
+            GetComponent<Rigidbody>().useGravity = true;
+            GetComponent<Renderer>().material.color = color_inactive;
+        }
+
+        if (!shield_active)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+            gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        }
+    }
+
     void OnCollisionEnter(Collision col)
     {
         //Colisions between enemies
-        if (col.gameObject.tag == "Enemy_A")
-        {
-            if (!shield_active)
-            {
-                GetComponent<Rigidbody>().useGravity = true;
-                impacted = true;
-                GetComponent<Renderer>().material.color = color_inactive;
-            }
-        }
+        //if (col.gameObject.tag == "Enemy_A")
+        //{
+        //    if (shield_active)
+        //    {
+        //        shield_active = false;
+        //        shield_broken = true;
+        //    }
+        //    else
+        //    {
+        //        impacted = true;
+        //    }                
+        //}
 
         // Colisions between ball and enemy
         if (col.gameObject.tag == "Ball")
@@ -78,15 +97,10 @@ public class Enemy : MonoBehaviour {
             if (shield_active)
             {
                 shield_active = false;
-                transform.GetChild(0).gameObject.SetActive(false);
-                gameObject.GetComponent<Rigidbody>().isKinematic = false;
-                Destroy(col.gameObject);
             }
             else
             {
-                GetComponent<Rigidbody>().useGravity = true;
                 impacted = true;
-                GetComponent<Renderer>().material.color = color_inactive;
             }
         }
     }

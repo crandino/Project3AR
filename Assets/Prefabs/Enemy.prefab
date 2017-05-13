@@ -31,7 +31,7 @@ GameObject:
   - 54: {fileID: 5463080}
   - 114: {fileID: 11433682}
   m_Layer: 0
-  m_Name: Enemy_A
+  m_Name: Enemy
   m_TagString: Enemy_A
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -157,7 +157,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 100
-  speed: 1
+  min_speed: 0.4
+  max_speed: 1
   max_time_before_disappear: 3
 --- !u!136 &13661002
 CapsuleCollider:
