@@ -62,6 +62,9 @@ public class LevelManager : MonoBehaviour
                 {
                     UpdateEnemies();
 
+                    if (Input.GetKeyDown(KeyCode.R))
+                        ResetLevel();
+
                     if (timer > time_between_spawns)
                     {
                         GenerateEnemy();
@@ -138,5 +141,22 @@ public class LevelManager : MonoBehaviour
         game_phase = GAME_PHASES.LOSE;
 
         Debug.Log("YOU LOSE!");
+    }
+
+    void ResetLevel()
+    {
+        // Deleting all enemies
+        foreach (GameObject e in list_of_enemies)
+        {
+            Destroy(e);                
+        }
+        list_of_enemies.Clear();
+
+        // Deleting all balls
+        GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
+        foreach (GameObject b in balls)
+        {
+            Destroy(b);
+        }
     }
 }

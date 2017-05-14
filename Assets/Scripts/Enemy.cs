@@ -19,13 +19,10 @@ public class Enemy : MonoBehaviour {
     private Color color_active;
     private Color color_inactive;
 
-    private LevelManager level_manager;
     GameObject ball_impacted;
 
     void Start()
     {
-        level_manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelManager>();
-
         color_inactive = Color.gray;
         color_active = Color.yellow;
         
@@ -94,8 +91,12 @@ public class Enemy : MonoBehaviour {
             {
                 impacted = true;
             }
-
-            col.gameObject.SetActive(false);
+            
+            // Removing Rigidbody and Collider from the ball. Later, on ResetLevel() from
+            // Level Manager, the Ball will be deleted.
+            Destroy(col.gameObject.GetComponent<Rigidbody>());
+            Destroy(col.gameObject.GetComponent<SphereCollider>());
+            col.gameObject.transform.position = new Vector3(0.0f, -1000.0f, 0.0f);
         }
 
         //Colisions between enemies
