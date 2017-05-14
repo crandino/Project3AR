@@ -105,10 +105,6 @@ public class Enemy : MonoBehaviour {
             {
                 impacted = true;
             }
-            //else
-            //{
-            //    impacted = true;
-            //}
         }
     }
 
