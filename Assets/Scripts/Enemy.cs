@@ -19,6 +19,8 @@ public class Enemy : MonoBehaviour {
     private Color color_active;
     private Color color_inactive;
 
+    private GameObject ground_marker;
+
     void Start()
     {
         color_inactive = Color.gray;
@@ -40,12 +42,14 @@ public class Enemy : MonoBehaviour {
         // Private variables to control impacts, 
         impacted = false;
         ready_to_delete = false;
+
+        ground_marker = GameObject.FindGameObjectWithTag("Terrain");
     }
 
     public void UpdateMovement()
     {
-        transform.Translate(-transform.forward * speed * Time.deltaTime);  // Enemies follow plane 
-
+        transform.Translate(ground_marker.transform.forward * speed * Time.deltaTime);  // Enemies follow plane 
+       
         if (impacted)
         {
             if (time_since_impact > max_time_before_disappear)
