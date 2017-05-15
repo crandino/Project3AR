@@ -170,6 +170,7 @@ public class LevelManager : MonoBehaviour
 
         //Reset cannon bullets
         cannon.GetComponent<TurretController>().num_balls = cannon.GetComponent<TurretController>().game_defined_balls;
+        GameObject.Find("UIManager").GetComponent<InGameUI>().SetCurrentBalls(cannon.GetComponent<TurretController>().game_defined_balls);
     }
 
     public void ChangeGameState(GAME_PHASES phase)
