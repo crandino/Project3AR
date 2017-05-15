@@ -83,6 +83,7 @@ public class LevelManager : MonoBehaviour
                 {
                     if(GameObject.Find("UIManager").GetComponent<InGameUI>().main_menu)
                     {
+                        ResetLevel();
                         game_phase = GAME_PHASES.MENU;
                     }
                     break;
@@ -92,6 +93,7 @@ public class LevelManager : MonoBehaviour
                 {
                     if (GameObject.Find("UIManager").GetComponent<InGameUI>().main_menu)
                     {
+                        ResetLevel();
                         game_phase = GAME_PHASES.MENU;
                     }
                     break;
@@ -165,6 +167,9 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(b);
         }
+
+        //Reset cannon bullets
+        cannon.GetComponent<TurretController>().num_balls = cannon.GetComponent<TurretController>().game_defined_balls;
     }
 
     public void ChangeGameState(GAME_PHASES phase)

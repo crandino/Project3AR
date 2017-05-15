@@ -13,6 +13,8 @@ public class TurretController : MonoBehaviour
     private float start_time;
     [HideInInspector] public float final_time;
 
+    [HideInInspector] public int game_defined_balls;
+
     private float power_units;
     private float power_tmp;
 
@@ -23,6 +25,7 @@ public class TurretController : MonoBehaviour
     {     
         level_manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelManager>();
         power_units = max_power_launch / charger_time;
+        game_defined_balls = num_balls;
     }
 
     // Update is called once per frame
