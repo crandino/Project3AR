@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour
     public float time_between_spawns;
 
     private float timer;
+    private float height_ground;
 
     private GameObject ground_marker;
     private GameObject turret_marker;
@@ -54,7 +55,11 @@ public class LevelManager : MonoBehaviour
             case (GAME_PHASES.MENU):
                 {
                     if (AreTargetsReady() && GameObject.Find("UIManager").GetComponent<InGameUI>().game_start || debug_mode )
+                    {
+                        height_ground = ground_marker.transform.position.y;
                         game_phase = GAME_PHASES.GAME;
+                    }                        
+
                     break;
                 }
                
@@ -100,7 +105,7 @@ public class LevelManager : MonoBehaviour
         float random_width = Random.Range(-4.5f, 4.5f);
 
         Vector3 enemy_position = (ground_marker.transform.position) + (ground_marker.transform.forward * random_distance);
-        enemy_position.y = 0.75f;
+        enemy_position.y = height_ground + 0.75f;
         //  enemy_position.x += random_width;
         enemy_position.x = 0.0f;
 
