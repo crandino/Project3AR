@@ -100,10 +100,10 @@ public class InGameUI : MonoBehaviour {
                         GameObject.Find("Canvas").transform.FindChild("YouLoseText").gameObject.SetActive(false);
                         GameObject.Find("Canvas").transform.FindChild("MainMenuButton").gameObject.SetActive(false);
 
-                        game_on = false;
-                    }
+                        GameObject.Find("Canvas").transform.FindChild("StartButton").gameObject.SetActive(true);
 
-                    GameObject.Find("Canvas").transform.FindChild("StartButton").gameObject.SetActive(true);
+                        game_on = false;
+                    }                
                     break;
                 }
 
