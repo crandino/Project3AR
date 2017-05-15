@@ -7,9 +7,29 @@ public class InGameUI : MonoBehaviour {
 
     Image foreground_image;
 
+    GameObject foreground_go;
+    GameObject background_go;
+
+    GameObject start_go;
+
+    GameObject you_win_go;
+    GameObject you_lose_go;
+
+    GameObject main_menu_go;
+
+    GameObject balls_marker_go;
+    GameObject balls_marker_background_go;
+
     private float charging_value;
     private float charging_units;
     private float actual_time_value;
+
+    private int current_balls;
+
+    public void SetCurrentBalls(int balls)
+    {
+        current_balls = balls;
+    }
 
     private GAME_PHASES game_phase;
     private bool game_on;
@@ -63,20 +83,32 @@ public class InGameUI : MonoBehaviour {
         charging_units = charging_value / 100.0f;
 
         //Charging bar
-        GameObject.Find("Canvas").transform.FindChild("Background").gameObject.SetActive(false);
-        GameObject.Find("Canvas").transform.FindChild("Foreground").gameObject.SetActive(false);
+        background_go = GameObject.Find("Canvas").transform.FindChild("Background").gameObject;
+        background_go.SetActive(false);
+        foreground_go = GameObject.Find("Canvas").transform.FindChild("Foreground").gameObject;
+        foreground_go.SetActive(false);
 
         //Start Screen
-        GameObject.Find("Canvas").transform.FindChild("StartButton").gameObject.SetActive(false);
+        start_go = GameObject.Find("Canvas").transform.FindChild("StartButton").gameObject;
+        start_go.SetActive(false);
 
         //You Win Screen
-        GameObject.Find("Canvas").transform.FindChild("YouWinText").gameObject.SetActive(false);
+        you_win_go = GameObject.Find("Canvas").transform.FindChild("YouWinText").gameObject;
+        you_win_go.SetActive(false);
 
         //You Lose Screen
-        GameObject.Find("Canvas").transform.FindChild("YouLoseText").gameObject.SetActive(false);
+        you_lose_go = GameObject.Find("Canvas").transform.FindChild("YouLoseText").gameObject;
+        you_lose_go.SetActive(false);
 
         //Main Menu Button
-        GameObject.Find("Canvas").transform.FindChild("MainMenuButton").gameObject.SetActive(false);
+        main_menu_go = GameObject.Find("Canvas").transform.FindChild("MainMenuButton").gameObject;
+        main_menu_go.SetActive(false);
+
+        //Balls Marker
+        balls_marker_go = GameObject.Find("Canvas").transform.FindChild("BallsMarker").gameObject;
+        balls_marker_go.SetActive(false);
+        balls_marker_background_go = GameObject.Find("Canvas").transform.FindChild("BallsMarkerBackground").gameObject;
+        balls_marker_background_go.SetActive(false);
 
         game_start = false;
         main_menu = false;
@@ -96,14 +128,15 @@ public class InGameUI : MonoBehaviour {
                         game_start = false;
                         main_menu = false;
 
-                        GameObject.Find("Canvas").transform.FindChild("YouWinText").gameObject.SetActive(false);
-                        GameObject.Find("Canvas").transform.FindChild("YouLoseText").gameObject.SetActive(false);
-                        GameObject.Find("Canvas").transform.FindChild("MainMenuButton").gameObject.SetActive(false);
-
-                        GameObject.Find("Canvas").transform.FindChild("StartButton").gameObject.SetActive(true);
+                        you_win_go.SetActive(false);
+                        you_lose_go.SetActive(false);
+                        main_menu_go.SetActive(false);
 
                         game_on = false;
-                    }                
+                    }
+
+                    start_go.SetActive(true);
+                               
                     break;
                 }
 
@@ -111,35 +144,47 @@ public class InGameUI : MonoBehaviour {
                 {
                     if (game_on == false)
                     {
-                        GameObject.Find("Canvas").transform.FindChild("StartButton").gameObject.SetActive(false);
+                        start_go.SetActive(false);
 
-                        GameObject.Find("Canvas").transform.FindChild("Background").gameObject.SetActive(true);
-                        GameObject.Find("Canvas").transform.FindChild("Foreground").gameObject.SetActive(true);
+                        background_go.SetActive(true);
+                        foreground_go.SetActive(true);
+
+                        balls_marker_go.SetActive(true);
+                        balls_marker_background_go.SetActive(true);
+
                         game_on = true;
                     }
 
                     actual_time_value = GameObject.FindGameObjectWithTag("Cannon").GetComponent<TurretController>().final_time;
                     charging_bar_value = (int)(actual_time_value / charging_units);
+
+                    balls_marker_go.GetComponent<Text>().text = current_balls.ToString();
                 }
                 break;
 
             case (GAME_PHASES.WIN):
                 {
-                    GameObject.Find("Canvas").transform.FindChild("Background").gameObject.SetActive(false);
-                    GameObject.Find("Canvas").transform.FindChild("Foreground").gameObject.SetActive(false);
+                    background_go.SetActive(false);
+                    foreground_go.SetActive(false);
 
-                    GameObject.Find("Canvas").transform.FindChild("YouWinText").gameObject.SetActive(true);
-                    GameObject.Find("Canvas").transform.FindChild("MainMenuButton").gameObject.SetActive(true);
+                    balls_marker_go.SetActive(false);
+                    balls_marker_background_go.SetActive(false);
+
+                    you_win_go.SetActive(true);
+                    main_menu_go.SetActive(true);
                     break;
                 }
 
             case (GAME_PHASES.LOSE):
                 {
-                    GameObject.Find("Canvas").transform.FindChild("Background").gameObject.SetActive(false);
-                    GameObject.Find("Canvas").transform.FindChild("Foreground").gameObject.SetActive(false);
+                    background_go.SetActive(false);
+                    foreground_go.SetActive(false);
 
-                    GameObject.Find("Canvas").transform.FindChild("YouLoseText").gameObject.SetActive(true);
-                    GameObject.Find("Canvas").transform.FindChild("MainMenuButton").gameObject.SetActive(true);
+                    balls_marker_go.SetActive(false);
+                    balls_marker_background_go.SetActive(false);
+
+                    you_lose_go.SetActive(true);
+                    main_menu_go.SetActive(true);
                     break;
                 }
         }
