@@ -20,12 +20,16 @@ public class TurretController : MonoBehaviour
 
     private LevelManager level_manager;
 
+    private AudioSource[] audio_sources;
+
 	// Use this for initialization
 	void Start ()
     {     
         level_manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelManager>();
         power_units = max_power_launch / charger_time;
         game_defined_balls = num_balls;
+
+        audio_sources = GameObject.FindGameObjectWithTag("Cannon").GetComponents<AudioSource>();
     }
 
     // Update is called once per frame
@@ -64,6 +68,8 @@ public class TurretController : MonoBehaviour
                         Vector3 ball_position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.75f, gameObject.transform.position.z);
                         GameObject ball_instance = (GameObject)Instantiate(ball_prefab, ball_position, Quaternion.identity);
                         ball_instance.GetComponent<Rigidbody>().AddForce(power_tmp * gameObject.transform.forward);
+
+                        audio_sources[Random.Range(0,2)].Play();
 
                         --num_balls; // One ball less
 
