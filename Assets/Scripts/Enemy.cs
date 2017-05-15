@@ -19,8 +19,6 @@ public class Enemy : MonoBehaviour {
     private Color color_active;
     private Color color_inactive;
 
-    GameObject ball_impacted;
-
     void Start()
     {
         color_inactive = Color.gray;
@@ -44,13 +42,13 @@ public class Enemy : MonoBehaviour {
         ready_to_delete = false;
     }
 
-	public void Update()
+    public void UpdateMovement()
     {
-        transform.Translate(transform.forward * speed * Time.deltaTime);  // Enemies follow plane 
+        transform.Translate(-transform.forward * speed * Time.deltaTime);  // Enemies follow plane 
 
-        if(impacted)
+        if (impacted)
         {
-            if(time_since_impact > max_time_before_disappear)
+            if (time_since_impact > max_time_before_disappear)
                 ready_to_delete = true;
             else
             {
@@ -60,7 +58,7 @@ public class Enemy : MonoBehaviour {
                 Color col = GetComponent<Renderer>().material.color;
                 col.a = Mathf.Lerp(1.0f, 0.0f, time_since_impact / max_time_before_disappear);
                 GetComponent<Renderer>().material.color = col;
-            }                
+            }
         }
     }
 

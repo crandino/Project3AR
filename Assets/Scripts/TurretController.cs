@@ -8,58 +8,69 @@ public class TurretController : MonoBehaviour
     public float max_power_launch;
     public float charger_time;
 
+    public int num_balls;
+
     private float start_time;
-    [HideInInspector]
-    public float final_time;
+    [HideInInspector] public float final_time;
 
     private float power_units;
     private float power_tmp;
 
-    private GameObject plane;
+    private LevelManager level_manager;
 
 	// Use this for initialization
 	void Start ()
-    {
+    {     
+        level_manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelManager>();
         power_units = max_power_launch / charger_time;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelManager>().GetCurrentPhase() == GAME_PHASES.GAME)
+        if (level_manager.IsGameRunning())
         {
-            // Track a single touch as a direction control.
-            if (Input.touchCount > 0)
+            if (num_balls > -1)
             {
-                power_tmp = 0;
-                if (Input.GetTouch(0).phase == TouchPhase.Began)
+                // Track a single touch as a direction control.
+                if (Input.touchCount > 0)
                 {
-                    start_time = Time.time * 1000;
-                }
-
-                if (Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetTouch(0).phase == TouchPhase.Stationary)
-                {
-                    final_time = (Time.time * 1000) - start_time;
-                }
-
-                if (Input.GetTouch(0).phase == TouchPhase.Ended)
-                {
-                    //final_time = (Time.time * 1000) - start_time;
-                    if (final_time > charger_time)
+                    power_tmp = 0;
+                    if (Input.GetTouch(0).phase == TouchPhase.Began)
                     {
-                        power_tmp = max_power_launch;
-                    }
-                    else
-                    {
-                        power_tmp = (power_units * final_time) + min_power_launch;
+                        start_time = Time.time * 1000;
                     }
 
-                    Vector3 ball_position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.75f, gameObject.transform.position.z);
-                    GameObject ball_instance = (GameObject)Instantiate(ball_prefab, ball_position, Quaternion.identity);
-                    ball_instance.GetComponent<Rigidbody>().AddForce(power_tmp * gameObject.transform.forward);
+                    if (Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetTouch(0).phase == TouchPhase.Stationary)
+                    {
+                        final_time = (Time.time * 1000) - start_time;
+                    }
 
-                    final_time = 0;
+                    if (Input.GetTouch(0).phase == TouchPhase.Ended)
+                    {
+                        //final_time = (Time.time * 1000) - start_time;
+                        if (final_time > charger_time)
+                        {
+                            power_tmp = max_power_launch;
+                        }
+                        else
+                        {
+                            power_tmp = (power_units * final_time) + min_power_launch;
+                        }
+
+                        Vector3 ball_position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.75f, gameObject.transform.position.z);
+                        GameObject ball_instance = (GameObject)Instantiate(ball_prefab, ball_position, Quaternion.identity);
+                        ball_instance.GetComponent<Rigidbody>().AddForce(power_tmp * gameObject.transform.forward);
+
+                        --num_balls; // One ball less
+
+                        final_time = 0;
+                    }
                 }
+            }
+            else
+            {
+                level_manager.ChangeGameState(GAME_PHASES.LOSE);
             }
         }
     }

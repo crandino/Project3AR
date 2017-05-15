@@ -14,10 +14,8 @@ public class InGameUI : MonoBehaviour {
     private GAME_PHASES game_phase;
     private bool game_on;
 
-    [HideInInspector]
-    public bool game_start;
-    [HideInInspector]
-    public bool main_menu;
+    [HideInInspector] public bool game_start;
+    [HideInInspector] public bool main_menu;
 
     public void SetStartGame(bool start)
     {

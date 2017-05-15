@@ -12,7 +12,7 @@ public enum GAME_PHASES
 public class LevelManager : MonoBehaviour
 {
     public bool debug_mode;
-    public GameObject enemy_A;   
+    public GameObject enemy;   
     public float time_between_spawns;
 
     private float timer;
@@ -60,11 +60,10 @@ public class LevelManager : MonoBehaviour
                
             case (GAME_PHASES.GAME):
                 {
+                    // Update movement and states of enemies
                     UpdateEnemies();
-
-                    if (Input.GetKeyDown(KeyCode.R))
-                        ResetLevel();
-
+                               
+                    // Each "time_between_spawns", a new enemy appears"       
                     if (timer > time_between_spawns)
                     {
                         GenerateEnemy();
@@ -100,15 +99,15 @@ public class LevelManager : MonoBehaviour
         float random_distance = Random.Range(10.0f, 35.0f);
         float random_width = Random.Range(-4.5f, 4.5f);
 
-        Vector3 enemy_position = (ground_marker.transform.position) - (ground_marker.transform.forward * random_distance);
+        Vector3 enemy_position = (ground_marker.transform.position) + (ground_marker.transform.forward * random_distance);
         enemy_position.y = 0.75f;
         //  enemy_position.x += random_width;
         enemy_position.x = 0.0f;
 
         //Vector3 enemy_position = terrain.transform.position + new Vector3(random_pos.x, 0.75f, random_pos.y);
-        GameObject enemy = Instantiate(enemy_A, enemy_position, Quaternion.identity) as GameObject;
-        enemy.transform.parent = ground_marker.transform;
-        list_of_enemies.Add(enemy);
+        GameObject e = Instantiate(enemy, enemy_position, Quaternion.AngleAxis(180.0f, Vector3.up)) as GameObject;
+        e.transform.parent = ground_marker.transform;
+        list_of_enemies.Add(e);
     }
 
     void UpdateEnemies()
@@ -117,6 +116,7 @@ public class LevelManager : MonoBehaviour
         foreach (GameObject e in list_of_enemies)
         {
             Enemy enemy_script = e.GetComponent<Enemy>();
+            enemy_script.UpdateMovement();
 
             if (enemy_script.ReadyToDelete())
                 list_of_enemies_to_remove.Add(e);
@@ -136,11 +136,13 @@ public class LevelManager : MonoBehaviour
         return false;
     }
 
-    void OnTriggerEnter()
+    void OnTriggerEnter(Collider col)
     {
-        game_phase = GAME_PHASES.LOSE;
-
-        Debug.Log("YOU LOSE!");
+        if(col.gameObject.tag == "Enemy")
+        {
+            game_phase = GAME_PHASES.LOSE;
+            Debug.Log("YOU LOSE!");
+        }            
     }
 
     void ResetLevel()
@@ -158,5 +160,15 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(b);
         }
+    }
+
+    public void ChangeGameState(GAME_PHASES phase)
+    {
+        game_phase = phase;
+    }
+
+    public bool IsGameRunning()
+    {
+        return game_phase == GAME_PHASES.GAME;
     }
 }
