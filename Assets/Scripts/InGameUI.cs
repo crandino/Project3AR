@@ -8,7 +8,6 @@ public class InGameUI : MonoBehaviour {
     private Image foreground_image;
 
     private GameObject foreground_go;
-    private GameObject background_go;
 
     private GameObject start_go;
 
@@ -18,10 +17,8 @@ public class InGameUI : MonoBehaviour {
     private GameObject main_menu_go;
 
     private GameObject balls_marker_go;
-    private GameObject balls_marker_background_go;
 
     private GameObject score_go;
-    private GameObject score_background_go;
 
     private GameObject ui_in_game_bck_1;
     private GameObject ui_in_game_bck_2;
@@ -99,8 +96,6 @@ public class InGameUI : MonoBehaviour {
         charging_units = charging_value / 100.0f;
 
         //Charging bar
-        //background_go = GameObject.Find("Canvas").transform.FindChild("Background").gameObject;
-        //background_go.SetActive(false);
         foreground_go = GameObject.Find("Canvas").transform.FindChild("Foreground").gameObject;
         foreground_go.SetActive(false);
 
@@ -123,14 +118,10 @@ public class InGameUI : MonoBehaviour {
         ////Balls Marker
         balls_marker_go = GameObject.Find("Canvas").transform.FindChild("BallsMarker").gameObject;
         balls_marker_go.SetActive(false);
-        //balls_marker_background_go = GameObject.Find("Canvas").transform.FindChild("BallsMarkerBackground").gameObject;
-        //balls_marker_background_go.SetActive(false);
 
         ////Score Marker
         score_go = GameObject.Find("Canvas").transform.FindChild("ScoreText").gameObject;
         score_go.SetActive(false);
-        //score_background_go = GameObject.Find("Canvas").transform.FindChild("ScoreBackground").gameObject;
-        //score_background_go.SetActive(false);
 
         //UI in game background
         ui_in_game_bck_1 = GameObject.Find("Canvas").transform.FindChild("ARGameUI1").gameObject;
@@ -180,14 +171,11 @@ public class InGameUI : MonoBehaviour {
                         ui_in_game_bck_1.SetActive(true);
                         ui_in_game_bck_2.SetActive(true);
 
-                        //background_go.SetActive(true);
                         foreground_go.SetActive(true);
 
                         balls_marker_go.SetActive(true);
-                        //balls_marker_background_go.SetActive(true);
 
                         score_go.SetActive(true);
-                        //score_background_go.SetActive(true);
 
                         game_on = true;
                     }
@@ -208,14 +196,11 @@ public class InGameUI : MonoBehaviour {
                     ui_in_game_bck_1.SetActive(false);
                     ui_in_game_bck_2.SetActive(false);
 
-                    //background_go.SetActive(false);
                     foreground_go.SetActive(false);
 
                     balls_marker_go.SetActive(false);
-                    //balls_marker_background_go.SetActive(false);
 
                     score_go.SetActive(false);
-                    //score_background_go.SetActive(false);
 
                     you_win_go.SetActive(true);
                     main_menu_go.SetActive(true);
@@ -228,14 +213,11 @@ public class InGameUI : MonoBehaviour {
                     ui_in_game_bck_1.SetActive(false);
                     ui_in_game_bck_2.SetActive(false);
 
-                    //background_go.SetActive(false);
                     foreground_go.SetActive(false);
 
                     balls_marker_go.SetActive(false);
-                    //balls_marker_background_go.SetActive(false);
 
                     score_go.SetActive(false);
-                    //score_background_go.SetActive(false);
 
                     you_lose_go.SetActive(true);
                     main_menu_go.SetActive(true);
