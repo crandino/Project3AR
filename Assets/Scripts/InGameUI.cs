@@ -5,23 +5,29 @@ using UnityEngine;
 
 public class InGameUI : MonoBehaviour {
 
-    Image foreground_image;
+    private Image foreground_image;
 
-    GameObject foreground_go;
-    GameObject background_go;
+    private GameObject foreground_go;
+    private GameObject background_go;
 
-    GameObject start_go;
+    private GameObject start_go;
 
-    GameObject you_win_go;
-    GameObject you_lose_go;
+    private GameObject you_win_go;
+    private GameObject you_lose_go;
 
-    GameObject main_menu_go;
+    private GameObject main_menu_go;
 
-    GameObject balls_marker_go;
-    GameObject balls_marker_background_go;
+    private GameObject balls_marker_go;
+    private GameObject balls_marker_background_go;
 
-    GameObject score_go;
-    GameObject score_background_go;
+    private GameObject score_go;
+    private GameObject score_background_go;
+
+    private GameObject ui_in_game_bck_1;
+    private GameObject ui_in_game_bck_2;
+
+    private GameObject level_manager;
+    private GameObject player_cannon;
 
     private float charging_value;
     private float charging_units;
@@ -93,8 +99,8 @@ public class InGameUI : MonoBehaviour {
         charging_units = charging_value / 100.0f;
 
         //Charging bar
-        background_go = GameObject.Find("Canvas").transform.FindChild("Background").gameObject;
-        background_go.SetActive(false);
+        //background_go = GameObject.Find("Canvas").transform.FindChild("Background").gameObject;
+        //background_go.SetActive(false);
         foreground_go = GameObject.Find("Canvas").transform.FindChild("Foreground").gameObject;
         foreground_go.SetActive(false);
 
@@ -114,17 +120,26 @@ public class InGameUI : MonoBehaviour {
         main_menu_go = GameObject.Find("Canvas").transform.FindChild("MainMenuButton").gameObject;
         main_menu_go.SetActive(false);
 
-        //Balls Marker
+        ////Balls Marker
         balls_marker_go = GameObject.Find("Canvas").transform.FindChild("BallsMarker").gameObject;
         balls_marker_go.SetActive(false);
-        balls_marker_background_go = GameObject.Find("Canvas").transform.FindChild("BallsMarkerBackground").gameObject;
-        balls_marker_background_go.SetActive(false);
+        //balls_marker_background_go = GameObject.Find("Canvas").transform.FindChild("BallsMarkerBackground").gameObject;
+        //balls_marker_background_go.SetActive(false);
 
-        //Score Marker
+        ////Score Marker
         score_go = GameObject.Find("Canvas").transform.FindChild("ScoreText").gameObject;
         score_go.SetActive(false);
-        score_background_go = GameObject.Find("Canvas").transform.FindChild("ScoreBackground").gameObject;
-        score_background_go.SetActive(false);
+        //score_background_go = GameObject.Find("Canvas").transform.FindChild("ScoreBackground").gameObject;
+        //score_background_go.SetActive(false);
+
+        //UI in game background
+        ui_in_game_bck_1 = GameObject.Find("Canvas").transform.FindChild("ARGameUI1").gameObject;
+        ui_in_game_bck_1.SetActive(false);
+        ui_in_game_bck_2 = GameObject.Find("Canvas").transform.FindChild("ARGameUI2").gameObject;
+        ui_in_game_bck_2.SetActive(false);
+
+        level_manager = GameObject.FindGameObjectWithTag("GameController");
+        player_cannon = GameObject.FindGameObjectWithTag("Cannon");
 
         game_start = false;
         main_menu = false;
@@ -133,7 +148,7 @@ public class InGameUI : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        game_phase = GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelManager>().GetCurrentPhase();
+        game_phase = level_manager.GetComponent<LevelManager>().GetCurrentPhase();
 
         switch (game_phase)
         {
@@ -162,19 +177,22 @@ public class InGameUI : MonoBehaviour {
                     {
                         start_go.SetActive(false);
 
-                        background_go.SetActive(true);
+                        ui_in_game_bck_1.SetActive(true);
+                        ui_in_game_bck_2.SetActive(true);
+
+                        //background_go.SetActive(true);
                         foreground_go.SetActive(true);
 
                         balls_marker_go.SetActive(true);
-                        balls_marker_background_go.SetActive(true);
+                        //balls_marker_background_go.SetActive(true);
 
                         score_go.SetActive(true);
-                        score_background_go.SetActive(true);
+                        //score_background_go.SetActive(true);
 
                         game_on = true;
                     }
 
-                    actual_time_value = GameObject.FindGameObjectWithTag("Cannon").GetComponent<TurretController>().final_time;
+                    actual_time_value = player_cannon.GetComponent<TurretController>().final_time;
                     charging_bar_value = (int)(actual_time_value / charging_units);
 
                     if (current_balls >= 0)
@@ -187,14 +205,17 @@ public class InGameUI : MonoBehaviour {
 
             case (GAME_PHASES.WIN):
                 {
-                    background_go.SetActive(false);
+                    ui_in_game_bck_1.SetActive(false);
+                    ui_in_game_bck_2.SetActive(false);
+
+                    //background_go.SetActive(false);
                     foreground_go.SetActive(false);
 
                     balls_marker_go.SetActive(false);
-                    balls_marker_background_go.SetActive(false);
+                    //balls_marker_background_go.SetActive(false);
 
                     score_go.SetActive(false);
-                    score_background_go.SetActive(false);
+                    //score_background_go.SetActive(false);
 
                     you_win_go.SetActive(true);
                     main_menu_go.SetActive(true);
@@ -204,14 +225,17 @@ public class InGameUI : MonoBehaviour {
 
             case (GAME_PHASES.LOSE):
                 {
-                    background_go.SetActive(false);
+                    ui_in_game_bck_1.SetActive(false);
+                    ui_in_game_bck_2.SetActive(false);
+
+                    //background_go.SetActive(false);
                     foreground_go.SetActive(false);
 
                     balls_marker_go.SetActive(false);
-                    balls_marker_background_go.SetActive(false);
+                    //balls_marker_background_go.SetActive(false);
 
                     score_go.SetActive(false);
-                    score_background_go.SetActive(false);
+                    //score_background_go.SetActive(false);
 
                     you_lose_go.SetActive(true);
                     main_menu_go.SetActive(true);

@@ -8,6 +8,8 @@ public class TurretController : MonoBehaviour
     public float max_power_launch;
     public float charger_time;
 
+    private GameObject ui_manager;
+
     public int num_balls;
 
     private float start_time;
@@ -31,8 +33,10 @@ public class TurretController : MonoBehaviour
 
         audio_sources = GameObject.FindGameObjectWithTag("Cannon").GetComponents<AudioSource>();
 
+        ui_manager = GameObject.Find("UIManager");
+
         //Set start balls
-        GameObject.Find("UIManager").GetComponent<InGameUI>().SetCurrentBalls(num_balls);
+        ui_manager.GetComponent<InGameUI>().SetCurrentBalls(num_balls);
     }
 
     // Update is called once per frame
@@ -76,7 +80,8 @@ public class TurretController : MonoBehaviour
 
                         --num_balls; // One ball less
 
-                        GameObject.Find("UIManager").GetComponent<InGameUI>().SetCurrentBalls(num_balls);
+                        //Updating UI num balls
+                        ui_manager.GetComponent<InGameUI>().SetCurrentBalls(num_balls);
 
                         final_time = 0;
                     }
@@ -92,6 +97,6 @@ public class TurretController : MonoBehaviour
     public void AddBalls(int extra_balls)
     {
         num_balls += extra_balls;
-        GameObject.Find("UIManager").GetComponent<InGameUI>().SetCurrentBalls(num_balls);
+        ui_manager.GetComponent<InGameUI>().SetCurrentBalls(num_balls);
     }
 }

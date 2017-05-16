@@ -26,7 +26,9 @@ public class LevelManager : MonoBehaviour
 
     private GameObject ground_marker;
     private GameObject turret_marker;
-    private GameObject cannon;    
+    private GameObject cannon;
+
+    private GameObject ui_manager;
 
     [HideInInspector] public List<GameObject> list_of_enemies;
     [HideInInspector] public List<GameObject> list_of_items;
@@ -59,8 +61,10 @@ public class LevelManager : MonoBehaviour
         list_of_items = new List<GameObject>();
         list_of_items_to_remove = new List<GameObject>();
 
+        ui_manager = GameObject.Find("UIManager");
+
         //Set ui score
-        GameObject.Find("UIManager").GetComponent<InGameUI>().SetCurrentScore(score);
+        ui_manager.GetComponent<InGameUI>().SetCurrentScore(score);
     }
 	
 	// Update is called once per frame
@@ -70,7 +74,7 @@ public class LevelManager : MonoBehaviour
         {
             case (GAME_PHASES.MENU):
                 {
-                    if (AreTargetsReady() && GameObject.Find("UIManager").GetComponent<InGameUI>().game_start || debug_mode )
+                    if (AreTargetsReady() && ui_manager.GetComponent<InGameUI>().game_start || debug_mode )
                     {
                         game_phase = GAME_PHASES.GAME;
                     }                        
@@ -112,7 +116,7 @@ public class LevelManager : MonoBehaviour
 
             case (GAME_PHASES.WIN):
                 {
-                    if(GameObject.Find("UIManager").GetComponent<InGameUI>().main_menu)
+                    if(ui_manager.GetComponent<InGameUI>().main_menu)
                     {
                         ResetLevel();
                         game_phase = GAME_PHASES.MENU;
@@ -122,7 +126,7 @@ public class LevelManager : MonoBehaviour
 
             case (GAME_PHASES.LOSE):
                 {
-                    if (GameObject.Find("UIManager").GetComponent<InGameUI>().main_menu)
+                    if (ui_manager.GetComponent<InGameUI>().main_menu)
                     {
                         ResetLevel();
                         game_phase = GAME_PHASES.MENU;
@@ -192,7 +196,7 @@ public class LevelManager : MonoBehaviour
         
         if(score_changed)
         {
-            GameObject.Find("UIManager").GetComponent<InGameUI>().SetCurrentScore(score);
+            ui_manager.GetComponent<InGameUI>().SetCurrentScore(score);
         }     
     }
 
@@ -259,7 +263,7 @@ public class LevelManager : MonoBehaviour
 
         //Reset cannon bullets
         cannon.GetComponent<TurretController>().num_balls = cannon.GetComponent<TurretController>().game_defined_balls;
-        GameObject.Find("UIManager").GetComponent<InGameUI>().SetCurrentBalls(cannon.GetComponent<TurretController>().game_defined_balls);
+        ui_manager.GetComponent<InGameUI>().SetCurrentBalls(cannon.GetComponent<TurretController>().game_defined_balls);
 
         // Resetting timers
         last_time_spawn = 0.0f;
