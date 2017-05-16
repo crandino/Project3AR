@@ -185,7 +185,7 @@ public class InGameUI : MonoBehaviour {
 
                     if (current_balls >= 0)
                     {
-                        balls_marker_go.GetComponent<Text>().text = current_balls.ToString();
+                        balls_marker_go.GetComponent<Text>().text = "Balls: " + current_balls.ToString();
                     }
                     score_go.GetComponent<Text>().text = "Score: " + current_score.ToString();
                 }
