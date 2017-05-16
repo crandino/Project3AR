@@ -149,7 +149,7 @@ public class LevelManager : MonoBehaviour
         GameObject e = Instantiate(enemy, Vector3.zero, Quaternion.AngleAxis(180.0f, Vector3.up)) as GameObject;
         e.transform.position = enemy_position;
         e.GetComponent<Enemy>().InitEnemy();
-        //e.transform.parent = ground_marker.transform;
+        e.transform.parent = ground_marker.transform;
         list_of_enemies.Add(e);
     }
 
