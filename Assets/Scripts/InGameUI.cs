@@ -177,7 +177,10 @@ public class InGameUI : MonoBehaviour {
                     actual_time_value = GameObject.FindGameObjectWithTag("Cannon").GetComponent<TurretController>().final_time;
                     charging_bar_value = (int)(actual_time_value / charging_units);
 
-                    balls_marker_go.GetComponent<Text>().text = current_balls.ToString();
+                    if (current_balls >= 0)
+                    {
+                        balls_marker_go.GetComponent<Text>().text = current_balls.ToString();
+                    }
                     score_go.GetComponent<Text>().text = current_score.ToString();
                 }
                 break;
