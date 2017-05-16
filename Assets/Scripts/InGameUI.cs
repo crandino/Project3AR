@@ -115,11 +115,11 @@ public class InGameUI : MonoBehaviour {
         main_menu_go = GameObject.Find("Canvas").transform.FindChild("MainMenuButton").gameObject;
         main_menu_go.SetActive(false);
 
-        ////Balls Marker
+        //Balls Marker
         balls_marker_go = GameObject.Find("Canvas").transform.FindChild("BallsMarker").gameObject;
         balls_marker_go.SetActive(false);
 
-        ////Score Marker
+        //Score Marker
         score_go = GameObject.Find("Canvas").transform.FindChild("ScoreText").gameObject;
         score_go.SetActive(false);
 
@@ -187,7 +187,7 @@ public class InGameUI : MonoBehaviour {
                     {
                         balls_marker_go.GetComponent<Text>().text = current_balls.ToString();
                     }
-                    score_go.GetComponent<Text>().text = current_score.ToString();
+                    score_go.GetComponent<Text>().text = "Score: " + current_score.ToString();
                 }
                 break;
 
