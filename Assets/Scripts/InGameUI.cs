@@ -20,6 +20,9 @@ public class InGameUI : MonoBehaviour {
     GameObject balls_marker_go;
     GameObject balls_marker_background_go;
 
+    GameObject score_go;
+    GameObject score_background_go;
+
     private float charging_value;
     private float charging_units;
     private float actual_time_value;
@@ -29,6 +32,13 @@ public class InGameUI : MonoBehaviour {
     public void SetCurrentBalls(int balls)
     {
         current_balls = balls;
+    }
+
+    private int current_score;
+
+    public void SetCurrentScore(int score)
+    {
+        current_score = score;
     }
 
     private GAME_PHASES game_phase;
@@ -110,6 +120,12 @@ public class InGameUI : MonoBehaviour {
         balls_marker_background_go = GameObject.Find("Canvas").transform.FindChild("BallsMarkerBackground").gameObject;
         balls_marker_background_go.SetActive(false);
 
+        //Score Marker
+        score_go = GameObject.Find("Canvas").transform.FindChild("ScoreText").gameObject;
+        score_go.SetActive(false);
+        score_background_go = GameObject.Find("Canvas").transform.FindChild("ScoreBackground").gameObject;
+        score_background_go.SetActive(false);
+
         game_start = false;
         main_menu = false;
     }
@@ -152,6 +168,9 @@ public class InGameUI : MonoBehaviour {
                         balls_marker_go.SetActive(true);
                         balls_marker_background_go.SetActive(true);
 
+                        score_go.SetActive(true);
+                        score_background_go.SetActive(true);
+
                         game_on = true;
                     }
 
@@ -159,6 +178,7 @@ public class InGameUI : MonoBehaviour {
                     charging_bar_value = (int)(actual_time_value / charging_units);
 
                     balls_marker_go.GetComponent<Text>().text = current_balls.ToString();
+                    score_go.GetComponent<Text>().text = current_score.ToString();
                 }
                 break;
 
@@ -170,8 +190,12 @@ public class InGameUI : MonoBehaviour {
                     balls_marker_go.SetActive(false);
                     balls_marker_background_go.SetActive(false);
 
+                    score_go.SetActive(false);
+                    score_background_go.SetActive(false);
+
                     you_win_go.SetActive(true);
                     main_menu_go.SetActive(true);
+
                     break;
                 }
 
@@ -183,8 +207,12 @@ public class InGameUI : MonoBehaviour {
                     balls_marker_go.SetActive(false);
                     balls_marker_background_go.SetActive(false);
 
+                    score_go.SetActive(false);
+                    score_background_go.SetActive(false);
+
                     you_lose_go.SetActive(true);
                     main_menu_go.SetActive(true);
+
                     break;
                 }
         }

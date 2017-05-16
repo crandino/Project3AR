@@ -15,6 +15,8 @@ public class LevelManager : MonoBehaviour
     public GameObject enemy;
     public GameObject item;
 
+    private int score;
+
     private float timer;
     public float time_between_spawns;
     public float time_between_items;
@@ -46,8 +48,13 @@ public class LevelManager : MonoBehaviour
 
         timer = 0.0f;
 
+        score = 0;
+
         list_of_enemies = new List<GameObject>();
         list_of_enemies_to_remove = new List<GameObject>();
+
+        //Set ui score
+        GameObject.Find("UIManager").GetComponent<InGameUI>().SetCurrentScore(score);
     }
 	
 	// Update is called once per frame
@@ -67,6 +74,11 @@ public class LevelManager : MonoBehaviour
                
             case (GAME_PHASES.GAME):
                 {
+                    if(score >= 2000)
+                    {
+                        game_phase = GAME_PHASES.WIN;
+                    }
+
                     // Update movement and states of enemies
                     UpdateEnemies();
                                
@@ -143,6 +155,8 @@ public class LevelManager : MonoBehaviour
 
     void UpdateEnemies()
     {
+        bool score_changed = false;
+
         // Updating enemies
         foreach (GameObject e in list_of_enemies)
         {
@@ -152,12 +166,22 @@ public class LevelManager : MonoBehaviour
             if (enemy_script.ReadyToDelete())
                 list_of_enemies_to_remove.Add(e);
         }
-        
+
         foreach (GameObject e in list_of_enemies_to_remove)
         {
+            if (!score_changed)
+            {
+                score_changed = true;
+            }
+            score += 100;
             if(list_of_enemies.Remove(e))
                 Destroy(e);
-        }       
+        }  
+        
+        if(score_changed)
+        {
+            GameObject.Find("UIManager").GetComponent<InGameUI>().SetCurrentScore(score);
+        }     
     }
 
     private bool AreTargetsReady()
