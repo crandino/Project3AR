@@ -29,6 +29,7 @@ GameObject:
   - 33: {fileID: 3311450}
   - 54: {fileID: 5494688}
   - 136: {fileID: 13652362}
+  - 114: {fileID: 11488030}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
@@ -368,6 +369,19 @@ MonoBehaviour:
   min_speed: 0.4
   max_speed: 1
   max_time_before_disappear: 3
+  impacted: 0
+  shield_active: 0
+--- !u!114 &11488030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb28daa3194c134bbe85378f99427d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &13652362
 CapsuleCollider:
   m_ObjectHideFlags: 1

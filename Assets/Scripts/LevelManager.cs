@@ -12,11 +12,14 @@ public enum GAME_PHASES
 public class LevelManager : MonoBehaviour
 {
     public bool debug_mode;
-    public GameObject enemy;   
-    public float time_between_spawns;
+    public GameObject enemy;
+    public GameObject item;
 
     private float timer;
-    private float height_ground;
+    public float time_between_spawns;
+    public float time_between_items;
+    private float last_time_spawn;
+    private float last_time_items;
 
     private GameObject ground_marker;
     private GameObject turret_marker;
@@ -56,7 +59,6 @@ public class LevelManager : MonoBehaviour
                 {
                     if (AreTargetsReady() && GameObject.Find("UIManager").GetComponent<InGameUI>().game_start || debug_mode )
                     {
-                        height_ground = ground_marker.transform.position.y;
                         game_phase = GAME_PHASES.GAME;
                     }                        
 
@@ -69,13 +71,19 @@ public class LevelManager : MonoBehaviour
                     UpdateEnemies();
                                
                     // Each "time_between_spawns", a new enemy appears"       
-                    if (timer > time_between_spawns)
+                    if (timer - last_time_spawn > time_between_spawns)
                     {
                         GenerateEnemy();
-                        timer = 0.0f;
+                        last_time_spawn = timer;
                     }
-                    else
-                        timer += Time.deltaTime;
+
+                    if(timer - last_time_items > time_between_items)
+                    {
+                        //GenerateItem();
+                        last_time_items = timer;
+                    }
+                    
+                    timer += Time.deltaTime;
                 }
                 break;
 
@@ -115,6 +123,22 @@ public class LevelManager : MonoBehaviour
         GameObject e = Instantiate(enemy, enemy_position, Quaternion.AngleAxis(180.0f, Vector3.up)) as GameObject;
         e.transform.parent = ground_marker.transform;
         list_of_enemies.Add(e);
+    }
+
+    void GenerateItem()
+    {
+        float random_distance = Random.Range(10.0f, 35.0f);
+        float random_width = Random.Range(-4.5f, 4.5f);
+
+        Vector3 enemy_position = (ground_marker.transform.position) + (ground_marker.transform.forward * random_distance);
+        enemy_position += ground_marker.transform.up * 0.05f;
+        //enemy_position.x += random_width;
+        //enemy_position.x = ground_marker.transform.x;
+
+        //Vector3 enemy_position = terrain.transform.position + new Vector3(random_pos.x, 0.75f, random_pos.y);
+        GameObject e = Instantiate(item, enemy_position, Quaternion.AngleAxis(-90.0f, Vector3.right)) as GameObject;
+        e.transform.parent = ground_marker.transform;
+        //list_of_enemies.Add(e);
     }
 
     void UpdateEnemies()
@@ -171,6 +195,11 @@ public class LevelManager : MonoBehaviour
         //Reset cannon bullets
         cannon.GetComponent<TurretController>().num_balls = cannon.GetComponent<TurretController>().game_defined_balls;
         GameObject.Find("UIManager").GetComponent<InGameUI>().SetCurrentBalls(cannon.GetComponent<TurretController>().game_defined_balls);
+
+        // Resetting timers
+        last_time_spawn = 0.0f;
+        last_time_items = 0.0f;
+        timer = 0.0f;
     }
 
     public void ChangeGameState(GAME_PHASES phase)

@@ -9,6 +9,7 @@ TagManager:
   - Terrain
   - Ball
   - Enemy
+  - Item
   layers:
   - Default
   - TransparentFX
