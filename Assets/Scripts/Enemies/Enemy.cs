@@ -63,9 +63,7 @@ public class Enemy : MonoBehaviour {
 
         // Private variables to control impacts, 
         impacted = false;
-        ready_to_delete = false;
-
-        
+        ready_to_delete = false;        
     }
 
     public void UpdateMovement()

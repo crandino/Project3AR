@@ -26,7 +26,9 @@ public class LevelManager : MonoBehaviour
     private GameObject cannon;    
 
     [HideInInspector] public List<GameObject> list_of_enemies;
+    [HideInInspector] public List<GameObject> list_of_items;
     private List<GameObject> list_of_enemies_to_remove;
+    private List<GameObject> list_of_items_to_remove;
 
     private GAME_PHASES game_phase;
 
@@ -48,6 +50,8 @@ public class LevelManager : MonoBehaviour
 
         list_of_enemies = new List<GameObject>();
         list_of_enemies_to_remove = new List<GameObject>();
+        list_of_items = new List<GameObject>();
+        list_of_items_to_remove = new List<GameObject>();
     }
 	
 	// Update is called once per frame
@@ -67,9 +71,7 @@ public class LevelManager : MonoBehaviour
                
             case (GAME_PHASES.GAME):
                 {
-                    // Update movement and states of enemies
-                    UpdateEnemies();
-                               
+                    //          ---- ENEMIES ----
                     // Each "time_between_spawns", a new enemy appears"       
                     if (timer - last_time_spawn > time_between_spawns)
                     {
@@ -77,13 +79,20 @@ public class LevelManager : MonoBehaviour
                         last_time_spawn = timer;
                     }
 
-                    if(timer - last_time_items > time_between_items)
+                    // Update movement and states of enemies
+                    UpdateEnemies();
+
+                    //           ---- ITEMS ----
+                    if (timer - last_time_items > time_between_items)
                     {
-                        //GenerateItem();
+                        GenerateItem();
                         last_time_items = timer;
                     }
-                    
-                    timer += Time.deltaTime;
+
+                    // Update items
+                    UpdateItems();
+
+                    timer += Time.deltaTime;  // Incrementing timer
                 }
                 break;
 
@@ -116,8 +125,7 @@ public class LevelManager : MonoBehaviour
 
         Vector3 enemy_position = (ground_marker.transform.position) + (ground_marker.transform.forward * random_distance);
         enemy_position += ground_marker.transform.up * 0.70f;
-        //enemy_position.x += random_width;
-        //enemy_position.x = ground_marker.transform.x;
+        enemy_position += ground_marker.transform.right * random_width;
 
         //Vector3 enemy_position = terrain.transform.position + new Vector3(random_pos.x, 0.75f, random_pos.y);
         GameObject e = Instantiate(enemy, enemy_position, Quaternion.AngleAxis(180.0f, Vector3.up)) as GameObject;
@@ -127,18 +135,17 @@ public class LevelManager : MonoBehaviour
 
     void GenerateItem()
     {
-        float random_distance = Random.Range(10.0f, 35.0f);
+        float random_distance = Random.Range(10.0f, 15.0f);
         float random_width = Random.Range(-4.5f, 4.5f);
 
-        Vector3 enemy_position = (ground_marker.transform.position) + (ground_marker.transform.forward * random_distance);
-        enemy_position += ground_marker.transform.up * 0.05f;
-        //enemy_position.x += random_width;
-        //enemy_position.x = ground_marker.transform.x;
+        Vector3 item_position = (ground_marker.transform.position) + (ground_marker.transform.forward * random_distance);
+        item_position += ground_marker.transform.up * 0.05f;
+        item_position += ground_marker.transform.right * random_width;
 
         //Vector3 enemy_position = terrain.transform.position + new Vector3(random_pos.x, 0.75f, random_pos.y);
-        GameObject e = Instantiate(item, enemy_position, Quaternion.AngleAxis(-90.0f, Vector3.right)) as GameObject;
-        e.transform.parent = ground_marker.transform;
-        //list_of_enemies.Add(e);
+        GameObject i = Instantiate(item, item_position, Quaternion.AngleAxis(-90.0f, Vector3.right)) as GameObject;
+        i.transform.parent = ground_marker.transform;
+        list_of_items.Add(i);
     }
 
     void UpdateEnemies()
@@ -158,6 +165,24 @@ public class LevelManager : MonoBehaviour
             if(list_of_enemies.Remove(e))
                 Destroy(e);
         }       
+    }
+
+    void UpdateItems()
+    {
+        // Updating enemies
+        foreach (GameObject i in list_of_items)
+        {
+            Items item_script = i.GetComponent<Items>();
+
+            if (item_script.UpdateTime())
+                list_of_items_to_remove.Add(i);             
+        }
+
+        foreach (GameObject i in list_of_items_to_remove)
+        {
+            if (list_of_items.Remove(i))
+                Destroy(i);
+        }
     }
 
     private bool AreTargetsReady()
@@ -184,6 +209,15 @@ public class LevelManager : MonoBehaviour
             Destroy(e);                
         }
         list_of_enemies.Clear();
+        list_of_enemies_to_remove.Clear();
+
+        // Deleting all items
+        foreach (GameObject i in list_of_items)
+        {
+            Destroy(i);
+        }
+        list_of_items.Clear();
+        list_of_items_to_remove.Clear();
 
         // Deleting all balls
         GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
