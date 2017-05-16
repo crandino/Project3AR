@@ -10,6 +10,7 @@ TagManager:
   - Ball
   - Enemy
   - Item
+  - Barrel
   layers:
   - Default
   - TransparentFX

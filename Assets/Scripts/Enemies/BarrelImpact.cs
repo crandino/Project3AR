@@ -12,7 +12,6 @@ public class BarrelImpact : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
-        // Colisions between ball and enemy
         if (col.gameObject.tag == "Ball")
         {
             if (enemy_script.shield_active)
@@ -25,21 +24,14 @@ public class BarrelImpact : MonoBehaviour {
                 enemy_script.impacted = true;
             }
 
-
-            // Removing Rigidbody and Collider from the ball. Later, on ResetLevel() from
-            // Level Manager, the Ball will be deleted.
-            Destroy(col.gameObject.GetComponent<Rigidbody>());
-            Destroy(col.gameObject.GetComponent<SphereCollider>());
             col.gameObject.transform.position = new Vector3(0.0f, -1000.0f, 0.0f);
+            Destroy(col.gameObject.GetComponent<SphereCollider>());
+            Destroy(col.gameObject.GetComponent<Rigidbody>());
         }
 
-        //Colisions between enemies
-        if (col.gameObject.tag == "Enemy")
+        if (col.gameObject.tag == "Barrel" && !enemy_script.shield_active)
         {
-            if (!enemy_script.shield_active)
-            {
-                enemy_script.impacted = true;
-            }
+            enemy_script.impacted = true;
         }
     }
 }

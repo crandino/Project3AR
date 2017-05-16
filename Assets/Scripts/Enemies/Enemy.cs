@@ -16,8 +16,9 @@ public class Enemy : MonoBehaviour {
     public bool impacted;
     public bool shield_active;
 
-    private Color color_active;
-    private Color color_inactive;
+    private bool blink_effect;
+    private float timer_blink_effect;
+    private float blink_effect_interval;
 
     private GameObject ground_marker;
     private GameObject barrel;
@@ -28,9 +29,7 @@ public class Enemy : MonoBehaviour {
 
     void Start()
     {
-        color_inactive = Color.gray;
-        color_active = Color.yellow;
-
+        blink_effect_interval = 0.1f;
         ground_marker = GameObject.FindGameObjectWithTag("Terrain");
 
         for (int i = 0; i < transform.childCount; ++i)
@@ -68,10 +67,6 @@ public class Enemy : MonoBehaviour {
 
     public void UpdateMovement()
     {
-        Vector3 dir = new Vector3(ground_marker.transform.forward.x, 0.0f, ground_marker.transform.forward.z);
-        dir.Normalize();
-        transform.Translate(dir * speed * Time.deltaTime);  // Enemies follow plane
-       
         if (impacted)
         {
             if (time_since_impact > max_time_before_disappear)
@@ -80,11 +75,24 @@ public class Enemy : MonoBehaviour {
             {
                 time_since_impact += Time.deltaTime;
 
-                // Applying some alpha to the material
-                //Color col = GetComponent<Renderer>().material.color;
-                //col.a = Mathf.Lerp(1.0f, 0.0f, time_since_impact / max_time_before_disappear);
-                //GetComponent<Renderer>().material.color = col;
+                //Applying some alpha to the material
+                if (timer_blink_effect > blink_effect_interval)
+                {
+                    blink_effect = !blink_effect;
+                    barrel.GetComponent<MeshRenderer>().enabled = blink_effect;
+                    timer_blink_effect = 0.0f;
+                }                    
+                else
+                {
+                    timer_blink_effect += Time.deltaTime;
+                }
             }
+        }
+        else
+        {
+            Vector3 dir = new Vector3(ground_marker.transform.forward.x, 0.0f, ground_marker.transform.forward.z);
+            dir.Normalize();
+            transform.Translate(dir * speed * Time.deltaTime);  // Enemies follow plane
         }
     }
 
