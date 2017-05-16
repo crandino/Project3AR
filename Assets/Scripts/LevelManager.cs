@@ -142,12 +142,14 @@ public class LevelManager : MonoBehaviour
         float random_width = Random.Range(-4.5f, 4.5f);
 
         Vector3 enemy_position = (ground_marker.transform.position) + (ground_marker.transform.forward * random_distance);
-        enemy_position += ground_marker.transform.up * 0.70f;
+        enemy_position += ground_marker.transform.up * 0.65f;
         //enemy_position += ground_marker.transform.right * random_width;
 
         //Vector3 enemy_position = terrain.transform.position + new Vector3(random_pos.x, 0.75f, random_pos.y);
-        GameObject e = Instantiate(enemy, enemy_position, Quaternion.AngleAxis(180.0f, Vector3.up)) as GameObject;
-        e.transform.parent = ground_marker.transform;
+        GameObject e = Instantiate(enemy, Vector3.zero, Quaternion.AngleAxis(180.0f, Vector3.up)) as GameObject;
+        e.transform.position = enemy_position;
+        e.GetComponent<Enemy>().InitEnemy();
+        //e.transform.parent = ground_marker.transform;
         list_of_enemies.Add(e);
     }
 
@@ -168,8 +170,6 @@ public class LevelManager : MonoBehaviour
 
     void UpdateEnemies()
     {
-        bool score_changed = false;
-
         // Updating enemies
         foreach (GameObject e in list_of_enemies)
         {
@@ -182,22 +182,11 @@ public class LevelManager : MonoBehaviour
 
         foreach (GameObject e in list_of_enemies_to_remove)
         {
-            if (!score_changed)
-            {
-                score_changed = true;
-            }
-
-            score += 100;
             if(list_of_enemies.Remove(e))
                 Destroy(e);
         }
 
         list_of_enemies_to_remove.Clear();  
-        
-        if(score_changed)
-        {
-            ui_manager.GetComponent<InGameUI>().SetCurrentScore(score);
-        }     
     }
 
     void UpdateItems()
@@ -269,6 +258,10 @@ public class LevelManager : MonoBehaviour
         last_time_spawn = 0.0f;
         last_time_items = 0.0f;
         timer = 0.0f;
+
+        // Reset Score
+        score = 0;
+        ui_manager.GetComponent<InGameUI>().SetCurrentScore(score);
     }
 
     public void ChangeGameState(GAME_PHASES phase)
@@ -279,5 +272,11 @@ public class LevelManager : MonoBehaviour
     public bool IsGameRunning()
     {
         return game_phase == GAME_PHASES.GAME;
+    }
+
+    public void UpdateScore(int extra_score = 0)
+    {
+        score += extra_score;
+        ui_manager.GetComponent<InGameUI>().SetCurrentScore(score);
     }
 }

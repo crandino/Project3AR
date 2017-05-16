@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour {
     private AudioSource[] metal_audio_sources;
     private AudioSource[] wood_audio_sources;
 
-    void Start()
+    public void InitEnemy()
     {
         blink_effect_interval = 0.1f;
         ground_marker = GameObject.FindGameObjectWithTag("Terrain");

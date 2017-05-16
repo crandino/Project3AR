@@ -4,10 +4,14 @@ using System.Collections;
 public class BarrelImpact : MonoBehaviour {
 
     Enemy enemy_script;
+    LevelManager level_manager;
+    bool score_obtained;
 
     void Start()
     {
         enemy_script = transform.parent.GetComponent<Enemy>();
+        level_manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelManager>();
+        score_obtained = false;
     }
 
     void OnCollisionEnter(Collision col)
@@ -21,6 +25,11 @@ public class BarrelImpact : MonoBehaviour {
             }
             else
             {
+                if(!score_obtained)
+                {
+                    level_manager.UpdateScore(100);
+                    score_obtained = true;
+                }
                 enemy_script.impacted = true;
             }
 
@@ -31,6 +40,11 @@ public class BarrelImpact : MonoBehaviour {
 
         if (col.gameObject.tag == "Barrel" && !enemy_script.shield_active)
         {
+            if (!score_obtained)
+            {
+                level_manager.UpdateScore(100);
+                score_obtained = true;
+            }
             enemy_script.impacted = true;
         }
     }
