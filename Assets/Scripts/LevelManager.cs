@@ -107,7 +107,7 @@ public class LevelManager : MonoBehaviour
         float random_width = Random.Range(-4.5f, 4.5f);
 
         Vector3 enemy_position = (ground_marker.transform.position) + (ground_marker.transform.forward * random_distance);
-        enemy_position += ground_marker.transform.up * 0.75f;
+        enemy_position += ground_marker.transform.up * 0.70f;
         //enemy_position.x += random_width;
         //enemy_position.x = ground_marker.transform.x;
 
