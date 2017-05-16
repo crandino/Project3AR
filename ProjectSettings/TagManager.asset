@@ -10,6 +10,7 @@ TagManager:
   - Ball
   - Enemy
   - Item
+  - Shield
   - Barrel
   layers:
   - Default

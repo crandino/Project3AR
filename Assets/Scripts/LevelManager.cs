@@ -163,7 +163,7 @@ public class LevelManager : MonoBehaviour
 
     void GenerateEnemy()
     {
-        float random_distance = Random.Range(15.0f, 40.0f);
+        float random_distance = Random.Range(15.0f, 30.0f);
         float random_width = Random.Range(-4.5f, 4.5f);
 
         Vector3 enemy_position = (ground_marker.transform.position) + (ground_marker.transform.forward * random_distance);
@@ -171,8 +171,8 @@ public class LevelManager : MonoBehaviour
         enemy_position += ground_marker.transform.right * random_width;
 
         GameObject e = Instantiate(enemy, enemy_position, Quaternion.AngleAxis(180.0f, Vector3.up)) as GameObject;
-        e.GetComponent<Enemy>().InitEnemy();
         e.transform.parent = ground_marker.transform;
+        e.GetComponent<Enemy>().InitEnemy();        
         list_of_enemies.Add(e);
     }
 
