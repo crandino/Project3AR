@@ -107,9 +107,9 @@ public class LevelManager : MonoBehaviour
         float random_width = Random.Range(-4.5f, 4.5f);
 
         Vector3 enemy_position = (ground_marker.transform.position) + (ground_marker.transform.forward * random_distance);
-        enemy_position.y = height_ground + 0.75f;
-        //  enemy_position.x += random_width;
-        enemy_position.x = 0.0f;
+        enemy_position += ground_marker.transform.up * 0.75f;
+        //enemy_position.x += random_width;
+        //enemy_position.x = ground_marker.transform.x;
 
         //Vector3 enemy_position = terrain.transform.position + new Vector3(random_pos.x, 0.75f, random_pos.y);
         GameObject e = Instantiate(enemy, enemy_position, Quaternion.AngleAxis(180.0f, Vector3.up)) as GameObject;

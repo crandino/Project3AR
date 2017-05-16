@@ -21,6 +21,9 @@ public class Enemy : MonoBehaviour {
 
     private GameObject ground_marker;
 
+    private AudioSource[] metal_audio_sources;
+    private AudioSource[] wood_audio_sources;
+
     void Start()
     {
         color_inactive = Color.gray;
@@ -38,6 +41,9 @@ public class Enemy : MonoBehaviour {
             gameObject.GetComponent<Rigidbody>().isKinematic = true;
             transform.GetChild(0).gameObject.SetActive(true);
         }
+
+        wood_audio_sources = GetComponents<AudioSource>();
+        metal_audio_sources = transform.GetChild(1).GetComponents<AudioSource>();
 
         // Private variables to control impacts, 
         impacted = false;
@@ -89,7 +95,8 @@ public class Enemy : MonoBehaviour {
         {
             if (shield_active)
             {
-                shield_active = false;
+                metal_audio_sources[Random.Range(0, 2)].Play();
+                shield_active = false;               
             }
             else
             {
