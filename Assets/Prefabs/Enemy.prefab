@@ -366,8 +366,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 100
-  min_speed: 0.4
-  max_speed: 1
+  min_speed: 0.5
+  max_speed: 2
   max_time_before_disappear: 3
   impacted: 0
   shield_active: 0

@@ -21,8 +21,8 @@ public class Enemy : MonoBehaviour {
     private float blink_effect_interval;
 
     private GameObject ground_marker;
-    private GameObject barrel;
-    private GameObject shield;
+    [HideInInspector] public GameObject barrel;
+    [HideInInspector] public GameObject shield;
 
     private AudioSource[] metal_audio_sources;
     private AudioSource[] wood_audio_sources;
@@ -96,19 +96,19 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    public void FixedUpdate()
-    {
-        if (impacted)
-        {
-            barrel.GetComponent<Rigidbody>().useGravity = true;
-            //GetComponent<Renderer>().material.color = color_inactive;
-        }
-        else if (!shield_active)
-        {
-            barrel.GetComponent<Rigidbody>().isKinematic = false;
-            shield.SetActive(false);            
-        }
-    }
+    //public void FixedUpdate()
+    //{
+    //    if (impacted)
+    //    {
+    //        barrel.GetComponent<Rigidbody>().useGravity = true;
+    //        //GetComponent<Renderer>().material.color = color_inactive;
+    //    }
+    //    else if (!shield_active)
+    //    {
+    //        barrel.GetComponent<Rigidbody>().isKinematic = false;
+    //        shield.SetActive(false);            
+    //    }
+    //}
 
     public bool ReadyToDelete()
     {

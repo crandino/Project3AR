@@ -44,23 +44,23 @@ public class TurretController : MonoBehaviour
     {
         if (level_manager.IsGameRunning())
         {
-            if (num_balls > -1)
+            // Track a single touch as a direction control.
+            if (Input.touchCount > 0)
             {
-                // Track a single touch as a direction control.
-                if (Input.touchCount > 0)
+                power_tmp = 0;
+                if (Input.GetTouch(0).phase == TouchPhase.Began)
                 {
-                    power_tmp = 0;
-                    if (Input.GetTouch(0).phase == TouchPhase.Began)
-                    {
-                        start_time = Time.time * 1000;
-                    }
+                    start_time = Time.time * 1000;
+                }
 
-                    if (Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetTouch(0).phase == TouchPhase.Stationary)
-                    {
-                        final_time = (Time.time * 1000) - start_time;
-                    }
+                if (Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetTouch(0).phase == TouchPhase.Stationary)
+                {
+                    final_time = (Time.time * 1000) - start_time;
+                }
 
-                    if (Input.GetTouch(0).phase == TouchPhase.Ended)
+                if (Input.GetTouch(0).phase == TouchPhase.Ended)
+                {
+                    if(num_balls > 0)
                     {
                         //final_time = (Time.time * 1000) - start_time;
                         if (final_time > charger_time)
@@ -76,20 +76,18 @@ public class TurretController : MonoBehaviour
                         GameObject ball_instance = (GameObject)Instantiate(ball_prefab, ball_position, Quaternion.identity);
                         ball_instance.GetComponent<Rigidbody>().AddForce(power_tmp * gameObject.transform.forward);
 
-                        audio_sources[Random.Range(0,2)].Play();
-
+                        audio_sources[Random.Range(0, 2)].Play();
                         --num_balls; // One ball less
 
                         //Updating UI num balls
                         ui_manager.GetComponent<InGameUI>().SetCurrentBalls(num_balls);
-
                         final_time = 0;
                     }
+                    else
+                    {
+                        level_manager.ChangeGameState(GAME_PHASES.LOSE);  // no more bullets!
+                    }
                 }
-            }
-            else
-            {
-                level_manager.ChangeGameState(GAME_PHASES.LOSE);
             }
         }
     }

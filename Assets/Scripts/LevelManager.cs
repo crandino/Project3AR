@@ -16,13 +16,18 @@ public class LevelManager : MonoBehaviour
     public GameObject item;
 
     public int score_to_reach;
-    public int score;
+    private int score;
 
     private float timer;
-    public float time_between_spawns;
-    public float time_between_items;
+    public float max_time_spawns;
+    public float min_time_spawns;
+    public float max_time_items;
+    public float min_time_items;
     private float last_time_spawn;
     private float last_time_items;
+
+    private float time_between_spawns;
+    private float time_between_items;
 
     private GameObject ground_marker;
     private GameObject turret_marker;
@@ -52,6 +57,8 @@ public class LevelManager : MonoBehaviour
         game_phase = GAME_PHASES.MENU;
 
         timer = 0.0f;
+        time_between_items = Random.Range(min_time_items, max_time_items);
+        time_between_spawns = Random.Range(min_time_spawns, max_time_spawns);
 
         score = 0;
 
@@ -95,6 +102,7 @@ public class LevelManager : MonoBehaviour
                     {
                         GenerateEnemy();
                         last_time_spawn = timer;
+                        time_between_spawns = Random.Range(min_time_spawns, max_time_spawns);
                     }
 
                     // Update movement and states of enemies
@@ -105,6 +113,7 @@ public class LevelManager : MonoBehaviour
                     {
                         GenerateItem();
                         last_time_items = timer;
+                        time_between_items = Random.Range(min_time_items, max_time_items);
                     }
 
                     // Update items
@@ -136,18 +145,32 @@ public class LevelManager : MonoBehaviour
         }   
 	}
 
+    void FixedUpdate()
+    {
+        switch (game_phase)
+        {
+            case (GAME_PHASES.GAME):
+                {
+                    // Update movement and states of enemies
+                    UpdateEnemies();
+
+                    // Update items
+                    UpdateItems();
+                }
+                break;
+        }
+    }
+
     void GenerateEnemy()
     {
-        float random_distance = Random.Range(10.0f, 35.0f);
+        float random_distance = Random.Range(15.0f, 40.0f);
         float random_width = Random.Range(-4.5f, 4.5f);
 
         Vector3 enemy_position = (ground_marker.transform.position) + (ground_marker.transform.forward * random_distance);
         enemy_position += ground_marker.transform.up * 0.65f;
-        //enemy_position += ground_marker.transform.right * random_width;
+        enemy_position += ground_marker.transform.right * random_width;
 
-        //Vector3 enemy_position = terrain.transform.position + new Vector3(random_pos.x, 0.75f, random_pos.y);
-        GameObject e = Instantiate(enemy, Vector3.zero, Quaternion.AngleAxis(180.0f, Vector3.up)) as GameObject;
-        e.transform.position = enemy_position;
+        GameObject e = Instantiate(enemy, enemy_position, Quaternion.AngleAxis(180.0f, Vector3.up)) as GameObject;
         e.GetComponent<Enemy>().InitEnemy();
         e.transform.parent = ground_marker.transform;
         list_of_enemies.Add(e);
@@ -160,9 +183,8 @@ public class LevelManager : MonoBehaviour
 
         Vector3 item_position = (ground_marker.transform.position) + (ground_marker.transform.forward * random_distance);
         item_position += ground_marker.transform.up * 0.05f;
-        //item_position += ground_marker.transform.right * random_width;
+        item_position += ground_marker.transform.right * random_width;
 
-        //Vector3 enemy_position = terrain.transform.position + new Vector3(random_pos.x, 0.75f, random_pos.y);
         GameObject i = Instantiate(item, item_position, Quaternion.AngleAxis(-90.0f, Vector3.right)) as GameObject;
         i.transform.parent = ground_marker.transform;
         list_of_items.Add(i);
@@ -218,7 +240,7 @@ public class LevelManager : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if(col.gameObject.tag == "Enemy")
+        if(col.gameObject.tag == "Barrel")
         {
             game_phase = GAME_PHASES.LOSE;
             Debug.Log("YOU LOSE!");

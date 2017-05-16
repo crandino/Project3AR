@@ -1566,9 +1566,10 @@ MonoBehaviour:
   enemy: {fileID: 163710, guid: ad7f7aacc7e833f47afdaf034306af40, type: 2}
   item: {fileID: 132620, guid: 44e5ab3eb0cf37845a2572c0ce5aeb17, type: 2}
   score_to_reach: 2000
-  score: 0
-  time_between_spawns: 5
-  time_between_items: 15
+  max_time_spawns: 5
+  min_time_spawns: 2
+  max_time_items: 8
+  min_time_items: 15
   list_of_enemies: []
   list_of_items: []
 --- !u!4 &1181568881
