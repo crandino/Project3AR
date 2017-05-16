@@ -30,6 +30,9 @@ public class TurretController : MonoBehaviour
         game_defined_balls = num_balls;
 
         audio_sources = GameObject.FindGameObjectWithTag("Cannon").GetComponents<AudioSource>();
+
+        //Set start balls
+        GameObject.Find("UIManager").GetComponent<InGameUI>().SetCurrentBalls(num_balls);
     }
 
     // Update is called once per frame
@@ -89,5 +92,6 @@ public class TurretController : MonoBehaviour
     public void AddBalls(int extra_balls)
     {
         num_balls += extra_balls;
+        GameObject.Find("UIManager").GetComponent<InGameUI>().SetCurrentBalls(num_balls);
     }
 }

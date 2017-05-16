@@ -30,6 +30,7 @@ public class Items : MonoBehaviour {
         if(col.gameObject.tag == "Ball" && available)
         {
             turret_controller.AddBalls(5);
+            available = false;
         }
 
         if (col.gameObject.tag == "Barrel" && available)
