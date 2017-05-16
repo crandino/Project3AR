@@ -73,6 +73,8 @@ public class TurretController : MonoBehaviour
 
                         --num_balls; // One ball less
 
+                        GameObject.Find("UIManager").GetComponent<InGameUI>().SetCurrentBalls(num_balls);
+
                         final_time = 0;
                     }
                 }
