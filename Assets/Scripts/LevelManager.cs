@@ -15,7 +15,8 @@ public class LevelManager : MonoBehaviour
     public GameObject enemy;
     public GameObject item;
 
-    private int score;
+    public int score_to_reach;
+    public int score;
 
     private float timer;
     public float time_between_spawns;
@@ -79,7 +80,7 @@ public class LevelManager : MonoBehaviour
                
             case (GAME_PHASES.GAME):
                 {
-                    if(score >= 2000)
+                    if(score >= score_to_reach)
                     {
                         game_phase = GAME_PHASES.WIN;
                     }
