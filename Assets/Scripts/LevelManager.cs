@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour
     public GameObject item;
 
     public int score_to_reach;
+    public int score;
 
     private float timer;
     public float time_between_spawns;
@@ -50,7 +51,7 @@ public class LevelManager : MonoBehaviour
 
         timer = 0.0f;
 
-        score_to_reach = 0;
+        score = 0;
 
         list_of_enemies = new List<GameObject>();
         list_of_enemies_to_remove = new List<GameObject>();
@@ -59,7 +60,7 @@ public class LevelManager : MonoBehaviour
         list_of_items_to_remove = new List<GameObject>();
 
         //Set ui score
-        GameObject.Find("UIManager").GetComponent<InGameUI>().SetCurrentScore(score_to_reach);
+        GameObject.Find("UIManager").GetComponent<InGameUI>().SetCurrentScore(score);
     }
 	
 	// Update is called once per frame
@@ -79,7 +80,7 @@ public class LevelManager : MonoBehaviour
                
             case (GAME_PHASES.GAME):
                 {
-                    if(score_to_reach >= 2000)
+                    if(score >= score_to_reach)
                     {
                         game_phase = GAME_PHASES.WIN;
                     }
@@ -181,14 +182,14 @@ public class LevelManager : MonoBehaviour
             {
                 score_changed = true;
             }
-            score_to_reach += 100;
+            score += 100;
             if(list_of_enemies.Remove(e))
                 Destroy(e);
         }  
         
         if(score_changed)
         {
-            GameObject.Find("UIManager").GetComponent<InGameUI>().SetCurrentScore(score_to_reach);
+            GameObject.Find("UIManager").GetComponent<InGameUI>().SetCurrentScore(score);
         }     
     }
 
