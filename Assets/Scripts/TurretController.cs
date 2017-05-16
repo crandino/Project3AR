@@ -88,4 +88,9 @@ public class TurretController : MonoBehaviour
             }
         }
     }
+
+    public void AddBalls(int extra_balls)
+    {
+        num_balls += extra_balls;
+    }
 }
