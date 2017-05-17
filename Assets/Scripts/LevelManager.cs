@@ -44,11 +44,6 @@ public class LevelManager : MonoBehaviour
 
     private AudioManager audio_manager;
 
-    public GAME_PHASES GetCurrentPhase()
-    {
-        return game_phase;
-    }
-
 	// Use this for initialization
 	void Start ()
     {
@@ -302,9 +297,14 @@ public class LevelManager : MonoBehaviour
         return game_phase == GAME_PHASES.GAME;
     }
 
+    public GAME_PHASES GetCurrentPhase()
+    {
+        return game_phase;
+    }
+
     public void UpdateScore(int extra_score = 0)
     {
         score += extra_score;
         ui_manager.SetCurrentScore(score);
-    }
+    }  
 }

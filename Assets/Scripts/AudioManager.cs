@@ -10,6 +10,7 @@ public class AudioManager : MonoBehaviour {
     public AudioClip[] metal_impacts;
     public AudioClip[] cannon_shots;
     public AudioClip[] wood_crashes;
+    public AudioClip item_crash;
 
     // Use this for initialization
     void Start ()
@@ -33,6 +34,11 @@ public class AudioManager : MonoBehaviour {
     public void PlayWoodCrash()
     {
         effect_source.PlayOneShot(wood_crashes[Random.Range(0, 2)]);
+    }
+
+    public void PlayItemCrash()
+    {
+        effect_source.PlayOneShot(item_crash);
     }
 
     public void PlayMusic()

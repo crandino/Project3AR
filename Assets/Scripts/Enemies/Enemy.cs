@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour {
     public bool impacted;
     public bool shield_active;
 
+    // Blinking effect variables
     private bool blink_effect;
     private float timer_blink_effect;
     private float blink_effect_interval;

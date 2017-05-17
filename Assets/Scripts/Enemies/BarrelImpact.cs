@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BarrelImpact : MonoBehaviour {
+public class BarrelImpact : MonoBehaviour
+{
+    bool score_obtained;  // Score is given once
 
-    Enemy enemy_script;
-    LevelManager level_manager;
-    bool score_obtained;
-
-    private AudioManager audio_manager;    
+    private Enemy enemy_script;
+    private AudioManager audio_manager;
+    private LevelManager level_manager;
 
     void Start()
     {
@@ -19,7 +19,7 @@ public class BarrelImpact : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag == "Ball")
+        if (col.gameObject.tag == "Ball")  // Balls hit barrels
         {
             if (enemy_script.shield_active)
             {
@@ -44,7 +44,7 @@ public class BarrelImpact : MonoBehaviour {
             Destroy(col.gameObject.GetComponent<SphereCollider>());
             Destroy(col.gameObject.GetComponent<Rigidbody>());
         }
-        else if (col.gameObject.tag == "Barrel" && !enemy_script.shield_active)
+        else if (col.gameObject.tag == "Barrel" && !enemy_script.shield_active) // Barrels hit barrels
         {
             if (!score_obtained)
             {
@@ -55,7 +55,7 @@ public class BarrelImpact : MonoBehaviour {
             enemy_script.impacted = true;
             enemy_script.barrel.GetComponent<Rigidbody>().useGravity = true;
         }
-        else if(col.gameObject.tag == "Item" && !enemy_script.shield_active)
+        else if(col.gameObject.tag == "Item" && !enemy_script.shield_active) // Item hit barrels
         {
             enemy_script.impacted = true;
             audio_manager.PlayWoodCrash();
