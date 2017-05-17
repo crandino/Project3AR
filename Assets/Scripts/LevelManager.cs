@@ -42,6 +42,8 @@ public class LevelManager : MonoBehaviour
 
     private GAME_PHASES game_phase;
 
+    private AudioManager audio_manager;
+
     public GAME_PHASES GetCurrentPhase()
     {
         return game_phase;
@@ -50,6 +52,7 @@ public class LevelManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        audio_manager = GameObject.FindGameObjectWithTag("Audio_Manager").GetComponent<AudioManager>();
         turret_marker = GameObject.FindGameObjectWithTag("Pos_Turret");
         cannon = GameObject.FindGameObjectWithTag("Cannon");
         ground_marker = GameObject.FindGameObjectWithTag("Terrain");
@@ -83,6 +86,7 @@ public class LevelManager : MonoBehaviour
                 {
                     if (AreTargetsReady() && ui_manager.GetComponent<InGameUI>().game_start || debug_mode )
                     {
+                        audio_manager.PlayMusic();
                         game_phase = GAME_PHASES.GAME;
                     }                        
 
@@ -243,7 +247,6 @@ public class LevelManager : MonoBehaviour
         if(col.gameObject.tag == "Barrel")
         {
             game_phase = GAME_PHASES.LOSE;
-            Debug.Log("YOU LOSE!");
         }            
     }
 
@@ -284,6 +287,9 @@ public class LevelManager : MonoBehaviour
         // Reset Score
         score = 0;
         ui_manager.GetComponent<InGameUI>().SetCurrentScore(score);
+
+        // Stop music
+        audio_manager.StopMusic();
     }
 
     public void ChangeGameState(GAME_PHASES phase)

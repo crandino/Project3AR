@@ -24,9 +24,6 @@ public class Enemy : MonoBehaviour {
     [HideInInspector] public GameObject barrel;
     [HideInInspector] public GameObject shield;
 
-    private AudioSource[] metal_audio_sources;
-    //private AudioSource[] wood_audio_sources;
-
     public void InitEnemy()
     {
         blink_effect_interval = 0.1f;
@@ -41,10 +38,8 @@ public class Enemy : MonoBehaviour {
                 barrel = tmp.gameObject;
                 shield = tmp.gameObject.transform.GetChild(0).gameObject;
             }
-            else if(tmp.name == "MetalImpacts")
-                metal_audio_sources = tmp.gameObject.GetComponents<AudioSource>();
         }
-        
+
         // Type of enemies
         speed = Random.Range(min_speed, max_speed);
         shield_active = Random.Range(0, 2) == 1 ? true : false;
@@ -94,10 +89,5 @@ public class Enemy : MonoBehaviour {
     public bool ReadyToDelete()
     {
         return ready_to_delete;
-    }
-
-    public void PlayMetalImpactSound()
-    {
-        metal_audio_sources[Random.Range(0, 2)].Play();
     }
 }

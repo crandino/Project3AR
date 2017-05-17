@@ -7,9 +7,12 @@ public class BarrelImpact : MonoBehaviour {
     LevelManager level_manager;
     bool score_obtained;
 
+    private AudioManager audio_manager;    
+
     void Start()
     {
         enemy_script = transform.parent.GetComponent<Enemy>();
+        audio_manager = GameObject.FindGameObjectWithTag("Audio_Manager").GetComponent<AudioManager>();
         level_manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelManager>();
         score_obtained = false;
     }
@@ -20,7 +23,7 @@ public class BarrelImpact : MonoBehaviour {
         {
             if (enemy_script.shield_active)
             {
-                enemy_script.PlayMetalImpactSound();
+                audio_manager.PlayMetalImpact();
                 enemy_script.barrel.GetComponent<Rigidbody>().isKinematic = false;
                 enemy_script.shield.SetActive(false);   
                 enemy_script.shield_active = false;
