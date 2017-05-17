@@ -9,9 +9,10 @@ public class AudioManager : MonoBehaviour {
     public AudioClip level_music;
     public AudioClip[] metal_impacts;
     public AudioClip[] cannon_shots;
+    public AudioClip[] wood_crashes;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
         music_source = gameObject.AddComponent<AudioSource>();
         music_source.playOnAwake = false;
@@ -27,6 +28,11 @@ public class AudioManager : MonoBehaviour {
     public void PlayMetalImpact()
     {
         effect_source.PlayOneShot(metal_impacts[Random.Range(0, 2)]);
+    }
+
+    public void PlayWoodCrash()
+    {
+        effect_source.PlayOneShot(wood_crashes[Random.Range(0, 2)]);
     }
 
     public void PlayMusic()

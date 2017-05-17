@@ -34,6 +34,7 @@ public class BarrelImpact : MonoBehaviour {
                 {
                     level_manager.UpdateScore(100);
                     score_obtained = true;
+                    audio_manager.PlayWoodCrash();
                 }
                 enemy_script.impacted = true;
                 enemy_script.barrel.GetComponent<Rigidbody>().useGravity = true;
@@ -42,7 +43,6 @@ public class BarrelImpact : MonoBehaviour {
             col.gameObject.transform.position = new Vector3(0.0f, -1000.0f, 0.0f);
             Destroy(col.gameObject.GetComponent<SphereCollider>());
             Destroy(col.gameObject.GetComponent<Rigidbody>());
-           // ball_that_impacted = col.gameObject;
         }
         else if (col.gameObject.tag == "Barrel" && !enemy_script.shield_active)
         {
@@ -50,6 +50,7 @@ public class BarrelImpact : MonoBehaviour {
             {
                 level_manager.UpdateScore(100);
                 score_obtained = true;
+                audio_manager.PlayWoodCrash();
             }
             enemy_script.impacted = true;
             enemy_script.barrel.GetComponent<Rigidbody>().useGravity = true;
@@ -57,6 +58,7 @@ public class BarrelImpact : MonoBehaviour {
         else if(col.gameObject.tag == "Item" && !enemy_script.shield_active)
         {
             enemy_script.impacted = true;
+            audio_manager.PlayWoodCrash();
             enemy_script.barrel.GetComponent<Rigidbody>().useGravity = true;
         }
     }

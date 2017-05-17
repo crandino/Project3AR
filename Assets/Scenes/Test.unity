@@ -681,80 +681,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85908bce537794c49a0d016f8b7a7da4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!82 &489366037
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 489366031}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 360415758721fb74497e70eaaecdcb9e, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Spatialize: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!1 &491144413
 GameObject:
   m_ObjectHideFlags: 0
@@ -911,6 +837,9 @@ MonoBehaviour:
   cannon_shots:
   - {fileID: 8300000, guid: 2b85b7dc0cb915c47921cba4a81a7e6c, type: 3}
   - {fileID: 8300000, guid: 080c29b492b5a6544b17e92a20b76f4c, type: 3}
+  wood_crashes:
+  - {fileID: 8300000, guid: ac2f2391cdfa6cc4fa40dedc6cee0da0, type: 3}
+  - {fileID: 8300000, guid: b0aef9f70438bab48a7e3357b2734de5, type: 3}
 --- !u!4 &530910941
 Transform:
   m_ObjectHideFlags: 0
@@ -930,7 +859,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: As_BastoMaterial
+  m_Name: As_EspadaMaterial
   m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -943,7 +872,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 95c0b378d92043f28ce68eec76579500, type: 3}
+          m_Texture: {fileID: 2800000, guid: b7e78e2f471f4e74be6c75bdedbf003e, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats: {}
@@ -1581,7 +1510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2833541ab7abcdb419afce3a213eb32c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug_mode: 0
+  debug_mode: 1
   enemy: {fileID: 163710, guid: ad7f7aacc7e833f47afdaf034306af40, type: 2}
   item: {fileID: 132620, guid: 44e5ab3eb0cf37845a2572c0ce5aeb17, type: 2}
   score_to_reach: 2000
