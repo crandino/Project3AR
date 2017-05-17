@@ -12,6 +12,7 @@ TagManager:
   - Item
   - Shield
   - Barrel
+  - Audio_Manager
   layers:
   - Default
   - TransparentFX
