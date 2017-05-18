@@ -222,7 +222,9 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8248986, guid: 384a0d8cc71cef74a873b3353337ea2c, type: 2}
+    - {fileID: 8265954, guid: 384a0d8cc71cef74a873b3353337ea2c, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 384a0d8cc71cef74a873b3353337ea2c, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &103966532 stripped
@@ -840,6 +842,7 @@ MonoBehaviour:
   wood_crashes:
   - {fileID: 8300000, guid: ac2f2391cdfa6cc4fa40dedc6cee0da0, type: 3}
   - {fileID: 8300000, guid: b0aef9f70438bab48a7e3357b2734de5, type: 3}
+  item_crash: {fileID: 8300000, guid: 5f81ccf8cc0648e4096cd92b4922f368, type: 3}
 --- !u!4 &530910941
 Transform:
   m_ObjectHideFlags: 0
@@ -1510,7 +1513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2833541ab7abcdb419afce3a213eb32c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug_mode: 1
+  debug_mode: 0
   enemy: {fileID: 163710, guid: ad7f7aacc7e833f47afdaf034306af40, type: 2}
   item: {fileID: 132620, guid: 44e5ab3eb0cf37845a2572c0ce5aeb17, type: 2}
   score_to_reach: 2000
