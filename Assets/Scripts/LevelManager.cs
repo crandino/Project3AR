@@ -186,6 +186,7 @@ public class LevelManager : MonoBehaviour
 
         GameObject i = Instantiate(item, item_position, Quaternion.AngleAxis(-90.0f, Vector3.right)) as GameObject;
         i.transform.parent = ground_marker.transform;
+        i.GetComponent<Items>().InitItem();
         list_of_items.Add(i);
     }
 

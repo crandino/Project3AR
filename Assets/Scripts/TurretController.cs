@@ -23,8 +23,6 @@ public class TurretController : MonoBehaviour
     private LevelManager level_manager;
     private AudioManager audio_manager;
 
-    private AudioSource[] audio_sources;
-
 	// Use this for initialization
 	void Start ()
     {
@@ -32,8 +30,6 @@ public class TurretController : MonoBehaviour
         level_manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelManager>();
         power_units = max_power_launch / charger_time;
         game_defined_balls = num_balls;
-
-        audio_sources = GameObject.FindGameObjectWithTag("Cannon").GetComponents<AudioSource>();
 
         ui_manager = GameObject.Find("UIManager");
 
