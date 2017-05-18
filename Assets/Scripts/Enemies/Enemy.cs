@@ -81,9 +81,9 @@ public class Enemy : MonoBehaviour {
         }
         else
         {
-            Vector3 dir = new Vector3(ground_marker.transform.forward.x, 0.0f, ground_marker.transform.forward.z);
-            dir.Normalize();
-            transform.Translate(dir * speed * Time.deltaTime);  // Enemies follow plane
+            //Vector3 dir = new Vector3(ground_marker.transform.forward.x, 0.0f, ground_marker.transform.forward.z);
+            //dir.Normalize();
+            transform.Translate(ground_marker.transform.forward * speed * Time.deltaTime);  // Enemies follow plane
         }
     }
 
