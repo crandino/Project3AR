@@ -12,7 +12,11 @@ public class Items : MonoBehaviour {
     AudioManager audio_manager;
 
 	// Use this for initialization
+<<<<<<< HEAD
 	public void InitItem()
+=======
+	void InitItem()
+>>>>>>> 98bfabcdea92b8bb7b7405cb08951ace4b11364f
     {
         audio_manager = GameObject.FindGameObjectWithTag("Audio_Manager").GetComponent<AudioManager>();
         turret_controller = GameObject.FindGameObjectWithTag("Cannon").GetComponent<TurretController>();
